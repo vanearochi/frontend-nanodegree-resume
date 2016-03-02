@@ -8,7 +8,10 @@ var bio = {
 		"name" : "Vanessa Arochi",
 		"role" : "Web Developer",
 		"bioPic" : "images/vaneUdacity.jpg",
-		"welcomeMsg" : "bla bla"
+		"welcomeMsg" : "bla bla",
+		"skills" : [
+		"project developing", "programming", "sales"
+ 		]
 	}
 	],
 	"contacts" : [
@@ -29,19 +32,21 @@ var bioHTMLStrings = {
 		"name" : '<div class="col-md-12 id="name"><h1>%data%</h1></div>',
 		"role" : '<div class="col-md-12">%data%</div><hr>',
 		"bioPic" : '<div class="col-md-12"><img src="%data%" class="biopic img-responsive"></div>',
-		"welcomeMsg" : '<span class="welcome-message">%data%</span>'
+		"welcomeMsg" : '<span class="welcome-message">%data%</span>',
+		"skills" : '<li class="flex-item"><span class="">%data%</span></li>'
 		}
 	],
 
 	"contacts" : [
 		{
-		"contactGeneric" : '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>',
-		"mobile" : '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>',
- 		"email" : '<li class="flex-item"><span class="orange-text">email</span><span class="white-text">%data%</span></li>',
-		"github" : '<li class="flex-item"><span class="orange-text">github</span><span class="white-text">%data%</span></li>',
- 		"twitter" : '<li class="flex-item"><span class="orange-text">twitter</span><span class="white-text">%data%</span></li>',
-		"location" : '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>'
- //HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
+		"contactGeneric" : '<li class="flex-item"><span class="">%contact%</span><span class="">%data%</span></li>',
+		"mobile" : '<li class="flex-item"><span class="fa fa-phone-square fa-2x"></span><span class="">%data%</span></li>',
+ 		"email" : '<li class="flex-item"><span class="fa fa-envelope fa-2x"></span><span class="">%data%</span></li>',
+		"github" : '<li class="flex-item"><span class="fa fa-github-square fa-2x"></span><span class="">%data%</span></li>',
+ 		"twitter" : '<li class="flex-item"><span class="fa fa-twitter-square fa-2x"></span><span class="">%data%</span></li>',
+		"location" : '<li class="flex-item"><span class="fa fa-map-marker fa-2x"></span><span class="">%data%</span></li>'
+
+ //HTMLblog = '<li class="flex-item"><span class="">blog</span><span class="">%data%</span></li>';
  		}
 	]
 }
@@ -159,7 +164,7 @@ var project = {
 			"dates": "2016",
 			"description": "lakjsd",
 			"images": [
-				"",
+				"images/vaneUdacity.jpg",
 				""
 			]
 		},
@@ -262,18 +267,18 @@ console.log("Hello Vane")
 //substituteAndInsert(HTMLstring, info, classOrID, instruction)
 // $("#header").append(HTMLwelcomeMsg);
 
-// HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>';
-//  HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>';
-//  HTMLemail = '<li class="flex-item"><span class="orange-text">email</span><span class="white-text">%data%</span></li>';
-//  HTMLtwitter = '<li class="flex-item"><span class="orange-text">twitter</span><span class="white-text">%data%</span></li>';
-//  HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span><span class="white-text">%data%</span></li>';
-//  HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
-//  HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
+// HTMLcontactGeneric = '<li class="flex-item"><span class="">%contact%</span><span class="">%data%</span></li>';
+//  HTMLmobile = '<li class="flex-item"><span class="">mobile</span><span class="">%data%</span></li>';
+//  HTMLemail = '<li class="flex-item"><span class="">email</span><span class="">%data%</span></li>';
+//  HTMLtwitter = '<li class="flex-item"><span class="">twitter</span><span class="">%data%</span></li>';
+//  HTMLgithub = '<li class="flex-item"><span class="">github</span><span class="">%data%</span></li>';
+//  HTMLblog = '<li class="flex-item"><span class="">blog</span><span class="">%data%</span></li>';
+//  HTMLlocation = '<li class="flex-item"><span class="">location</span><span class="">%data%</span></li>';
 // var HTMLbioPic = '<img src="%data%" class="biopic">';
 // var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
 
 // var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance:</h3><ul id="skills" class="flex-box"></ul>';
-// var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
+// var HTMLskills = '<li class="flex-item"><span class="">%data%</span></li>';
 
 // var HTMLworkStart = '<div class="work-entry"></div>';
 // var HTMLworkEmployer = '<a href="#">%data%';
@@ -326,8 +331,8 @@ console.log("Hello Vane")
 
 
 function substituteAndInsert(HTMLstring, info, classOrID, instruction){
-	//console.log(HTMLstring);
-	//console.log(info);
+	console.log(HTMLstring);
+	console.log(info);
 	var changeData= HTMLstring.replace("%data%", info);
 	var appendData= $(classOrID).append(changeData);
 
@@ -420,11 +425,18 @@ function takeTheSubtituteInfo (objectInfo, objectHTML, objectName){
 				createNewStart(objectName);
 				for(var j = 0; j<secondKeyObjectInfo.length; j++){
 					var infoStr = objectInfo[firstKeyObjectInfo[h]][i][secondKeyObjectInfo[j]]
-					//console.log(infoStr);
 					var HTMLstr = objectHTML[firstKeyObjectHTML[h]][0][secondKeyObjectInfo[j]];
-
-					//console.log(HTMLstr + infoStr + className + "append")
-					substituteAndInsert(HTMLstr, infoStr, className, "append");
+					if(Array.isArray(infoStr)){
+						for(info in infoStr){
+							console.log(infoStr[info]);
+							substituteAndInsert(HTMLstr, infoStr[info], className, "append");
+						}
+					}
+					else{
+					//console.log(infoStr);
+							//console.log(HTMLstr + infoStr + className + "append")
+						substituteAndInsert(HTMLstr, infoStr, className, "append");
+						}
 				}
 			}
 			}
@@ -446,7 +458,11 @@ function takeTheSubtituteInfo (objectInfo, objectHTML, objectName){
 
 }
 
-//takeTheSubtituteInfo("education", educationHTMLStrings);
+var mq = window.matchMedia("(min-width: 750px)");
+if(mq.matches){
+	$
+}
+//q("education", educationHTMLStrings);
 //givemeTheKeys("work");
 
 //takeTheSubtituteInfo("work", workHTMLStrings);

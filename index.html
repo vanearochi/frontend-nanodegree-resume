@@ -69,14 +69,15 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     </div>
     <div class="col-sm-8">
       <div style="clear: both;"></div>
-      <div id="work" class="gray">
-        <h2>Work Experience</h2>
+      <div id="work">
+        <span class="fa fa-briefcase fa-3x"> Work Experience
+       </span>
       </div>
       <div id="project">
-        <h2>Projects</h2>
+        <span class="fa fa-folder fa-3x">Projects</span>
       </div>
       <div id="education" class="gray">
-        <h2>Education</h2>
+        <span class="fa fa-graduation-cap fa-3x">Education</span>
       </div>
       <div id="mapDiv">
         <h2>Where I've Lived and Worked</h2>
@@ -122,16 +123,16 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
 
 
     if(document.getElementsByClassName('flex-item').length === 0) {
-      document.getElementById('topContacts').style.display = 'none';
+      document.getElementById('contacts').style.display = 'none';
     }
     if(document.getElementsByTagName('h1').length === 0) {
       document.getElementById('header').style.display = 'none';
     }
     if(document.getElementsByClassName('work-entry').length === 0) {
-      document.getElementById('workExperience').style.display = 'none';
+      document.getElementById('work').style.display = 'none';
     }
     if(document.getElementsByClassName('project-entry').length === 0) {
-      document.getElementById('projects').style.display = 'none';
+      document.getElementById('project').style.display = 'none';
     }
     if(document.getElementsByClassName('education-entry').length === 0) {
       document.getElementById('education').style.display = 'none';
