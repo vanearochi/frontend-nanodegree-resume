@@ -10,30 +10,58 @@ h4,
 h5,
 h6 {
   padding:0;
-  margin:0;
-  font-family: "Roboto", sans-serif;
-    border-style: solid;
+  //margin:0;
+  //font-family: "Roboto", sans-serif;
+    //border-style: solid;
     background-color: white;
+    font-family: 'Quicksand', sans-serif;
 }
-  #header{
-    border-color: red;
-    background-color: blue;
-  }
+
   #projects{
-    border-color: red;
+    //border-color: red;
   }
   #projects{}
 
 
-
+#contacts{
+  margin-top: 4%;
+}
 .clear-fix {
   overflow: auto;
 }
 
+.biopic{
+  margin: 0 auto;
+}
+
+.title{
+  border-bottom-style: solid;
+}
+
+/*.role{
+  margin-bottom: 15%;
+}
+
+.skills{
+  margin-top: 10%;
+}*/
+
 .education-entry,
 .work-entry,
 .project-entry {
-  padding: 0 5%;
+border-left-style: ;
+//border-left-color: red;
+}
+
+#header{
+  //height: 100%;
+}
+.style{
+  padding-top: 3%;
+  padding-left: 3%;
+  border-left-style: solid;
+  border-left-color: #21708f;
+  border-left-width: 0.5em;
 }
 
 h1 {
@@ -73,6 +101,10 @@ h5 {
 
 }
 
+.skills:nth-child(-n+3){
+  clear:right;
+}
+
 
 .date-text {
   font-style: italic;
@@ -88,6 +120,7 @@ h5 {
   //color: #999;
   line-height: 16px;
   float: right;
+  padding-right: 10%;
 
 }
 
@@ -154,7 +187,7 @@ a {
 }
 
 .center-content {
-  padding: 2.5% 5%;
+  padding: 5% 5%;
 }
 
 ul {
@@ -162,7 +195,7 @@ ul {
 }
 
 .biopic {
-  float: left;
+  //float: left;
   padding: 10px;
   width: 200px;
   display: none;
@@ -216,6 +249,10 @@ span {
   height: 400px;
   width: 100%;
   padding-bottom: 5%;
+}
+
+body{
+font-size: 16px;
 }
 
 @media only screen and (min-width: 750px) {
