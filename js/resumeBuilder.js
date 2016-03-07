@@ -13,7 +13,7 @@ var bio = {
 	],
 	"message":[
 		{
-			"welcomeMsg": "blabla"
+			"welcomeMsg": "Hello my name is Vanessa Arochi"
 		}
 	],
 	"skills":[
@@ -40,8 +40,8 @@ var bioHTMLStrings = {
 	"personal": [
 		{
 		"bioPic" : '<div class="col-md-12 "><img src="%data%" class="biopic img-responsive img-circle"></div>',
-		"name" : '<div class="col-md-12 " id="name"><h1 class="header">%data%</h1></div>',
-		"role" : '<div class="col-md-12 role ">&nbsp %data%</div><hr>',
+		"name" : '<div class="col-md-12 text-uppercase text-center" id="name"><h1 class="header">%data%</h1></div>',
+		"role" : '<div class="col-md-12 text-center role">&nbsp %data%</div><hr>',
 		}
 	],
 	"message":[
@@ -51,18 +51,18 @@ var bioHTMLStrings = {
 	],
 	"skills":[
 		{
-			"skillsTitle" :'<div class="skills row text-uppercase text-center lead bg-primary">%data%</div>',
+			"skillsTitle" :'<div class="skills  text-uppercase text-center bg-primary">%data%</div>',
 			"skills" : '<div class="flex-grow  skills ">%data%</div>'
 		}
 	],
 	"contacts" : [
 		{
-		"contactGeneric" : '<ul id="contacts" class="lead text-center text-uppercase bg-primary">Contact me</ul>',
-		"mobile" : '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square fa-2x">&nbsp %data%</li></a>',
- 		"email" : '<a href="mailto:vanearochi@gmail.com" class=""><li class="flex-item fa fa-envelope fa-2x">&nbsp %data%</li></a>',
-		"github" : '<a href="https://github.com/vanearochi""><li class="flex-item fa fa-github-square fa-2x">&nbsp %data%</li></a>',
- 		"twitter" : '<a href="http://twitter.com/VaneArochi"><li class="flex-item fa fa-twitter-square fa-2x">&nbsp %data%</li></a>',
-		"location" : '<a href=""><li class="flex-item fa fa-map-marker fa-2x">&nbsp %data%</li></a>'
+		"contactGeneric" : '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me</div>',
+		"mobile" : '<ul><a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square text-right">&nbsp <span>%data%</span></li></a>',
+ 		"email" : '<a href="mailto:vanearochi@gmail.com" ><li class="flex-item fa fa-envelope">&nbsp <span class="textContact">%data%</span></li></a>',
+		"github" : '<a href="https://github.com/vanearochi"><li class="flex-item fa fa-github-square">&nbsp <span class="textContact">%data%</span></li></a>',
+ 		"twitter" : '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
+		"location" : '<a href=""><li class="flex-item fa fa-map-marker">&nbsp %data%</li></a></ul>'
 
  //HTMLblog = '<li class="flex-item"><span class="">blog</span><span class="">%data%</span></li>';
  		}
@@ -136,7 +136,7 @@ var work = {
 			"title": "Sales Application Specialist",
 			"location": "sf",
 			"dates": "1900",
-			"description": "alksdkldhja laksjdadsjl "
+			"description": "Hola me llamo lola y vengo sola bla bla blas"
 		},
 		{
 			"employer": "Bimbo",
@@ -254,16 +254,16 @@ console.log("Hello Vane")
 
 
 
-function substituteAndInsert(HTMLstring, info, classOrID, instruction){
-	console.log(HTMLstring);
-	console.log(info);
+function substituteAndInsert(HTMLstring, info, classOrID){
+	//console.log(HTMLstring);
+	//console.log(info);
 
 	var changeData= HTMLstring.replace("%data%", info);
 	var appendData= $(classOrID).append(changeData);
 
 }
 
-function createNewStart (sectionName ){
+function createNewStart (sectionName){
 		var startHTML = "<div class='"+sectionName+"-entry'></div>"
 		//console.log(startHTML);
 		$("#"+sectionName).append(startHTML);
@@ -318,13 +318,13 @@ function takeTheSubtituteInfo (objectInfo, objectHTML, objectName){
 					if(Array.isArray(infoStr)){
 						for(info in infoStr){
 							console.log(infoStr[info]);
-							substituteAndInsert(HTMLstr, infoStr[info], className, "append");
+							substituteAndInsert(HTMLstr, infoStr[info], className);
 						}
 					}
 					else{
 					//console.log(infoStr);
 							//console.log(HTMLstr + infoStr + className + "append")
-						substituteAndInsert(HTMLstr, infoStr, className, "append");
+						substituteAndInsert(HTMLstr, infoStr, className);
 						}
 				}
 			}
@@ -333,8 +333,16 @@ function takeTheSubtituteInfo (objectInfo, objectHTML, objectName){
 
 }
 
-var mq = window.matchMedia("(max-width: 750px)");
+var arrayFooter = [bioHTMLStrings.contacts[0].email, bioHTMLStrings.contacts[0].twitter, bioHTMLStrings.contacts[0].github]
+for(index in arrayFooter){
+	console.log(bioHTMLStrings.contacts[0].email);
+	substituteAndInsert(arrayFooter[index], "", footerContacts)
+}
+
+
+var mq = window.matchMedia("(min-width: 750px)");
 if(mq.matches){
 	console.log("ja")
-	$("li").removeClass("fa-2x")
+	//$("div").addClass("mediaQ")
+
 }

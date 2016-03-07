@@ -12,51 +12,51 @@ Cameron Pittman
 These are HTML strings. As part of the course, you'll be using JavaScript functions
 replace the %data% placeholder text you see in them.
 */
-var HTMLheaderName = '<div class="col-md-12 id="name"><h1>%data%</h1></div>';
-var HTMLheaderRole = '<div class="col-md-12">%data%</div><hr>';
+// var HTMLheaderName = '<div class="col-md-12 id="name"><h1>%data%</h1></div>';
+// var HTMLheaderRole = '<div class="col-md-12">%data%</div><hr>';
 
-var HTMLcontactGeneric = '<li class=""><span class="orange-text">%contact%</span><span class="black-text">%data%</span></li>';
-var HTMLmobile = '<li class=""><span class="fa fa-phone-square fa-2x"></span><span class="black-text">%data%</span></li>';
-var HTMLemail = '<li class=""><span class="fa fa-envelope fa-2x""></span><span class="black-text">%data%</span></li>';
-var HTMLtwitter = '<li class="flex-item"><span class="fa fa-twitter-square fa-2x"></span><span class="black-text">%data%</span></li>';
-var HTMLgithub = '<li class="flex-item"><span class="fa fa-github-square fa-2x"></span><span class="black-text">%data%</span></li>';
-var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="black-text">%data%</span></li>';
-var HTMLlocation = '<li class="flex-item"><span class="fa fa-map-marker fa-2x">&nbsp;</span><span class="black-text">%data%</span></li>';
+// var HTMLcontactGeneric = '<li class=""><span class="orange-text">%contact%</span><span class="black-text">%data%</span></li>';
+// var HTMLmobile = '<li class=""><span class="fa fa-phone-square fa-2x"></span><span class="black-text">%data%</span></li>';
+// var HTMLemail = '<li class=""><span class="fa fa-envelope fa-2x""></span><span class="black-text">%data%</span></li>';
+// var HTMLtwitter = '<li class="flex-item"><span class="fa fa-twitter-square fa-2x"></span><span class="black-text">%data%</span></li>';
+// var HTMLgithub = '<li class="flex-item"><span class="fa fa-github-square fa-2x"></span><span class="black-text">%data%</span></li>';
+// var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="black-text">%data%</span></li>';
+// var HTMLlocation = '<li class="flex-item"><span class="fa fa-map-marker fa-2x">&nbsp;</span><span class="black-text">%data%</span></li>';
 
-var HTMLbioPic = '<img src="%data%" class="biopic img-responsive">';
-var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
+// var HTMLbioPic = '<img src="%data%" class="biopic img-responsive">';
+// var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
 
-var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance:</h3><ul id="skills" class=""></ul>';
-var HTMLskills = '<li class="flex-item"><span class="black-text">%data%</span></li>';
+// var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance:</h3><ul id="skills" class=""></ul>';
+// var HTMLskills = '<li class="flex-item"><span class="black-text">%data%</span></li>';
 
-var HTMLworkStart = '<div class="work-entry"></div>';
-var HTMLworkEmployer = '<a href="#">%data%';
-var HTMLworkTitle = ' - %data%</a>';
-var HTMLworkDates = '<div class="date-text">%data%</div>';
-var HTMLworkLocation = '<div class="location-text">%data%</div>';
-var HTMLworkDescription = '<p><br>%data%</p>';
+// var HTMLworkStart = '<div class="work-entry"></div>';
+// var HTMLworkEmployer = '<a href="#">%data%';
+// var HTMLworkTitle = ' - %data%</a>';
+// var HTMLworkDates = '<div class="date-text">%data%</div>';
+// var HTMLworkLocation = '<div class="location-text">%data%</div>';
+// var HTMLworkDescription = '<p><br>%data%</p>';
 
-var HTMLprojectStart = '<div class="projects-entry"></div>';
-var HTMLprojectTitle = '<a href="#">%data%</a>';
-var HTMLprojectDates = '<div class="date-text">%data%</div>';
-var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
+// var HTMLprojectStart = '<div class="projects-entry"></div>';
+// var HTMLprojectTitle = '<a href="#">%data%</a>';
+// var HTMLprojectDates = '<div class="date-text">%data%</div>';
+// var HTMLprojectDescription = '<p><br>%data%</p>';
+// var HTMLprojectImage = '<img src="%data%">';
 
-var HTMLschoolStart = '<div class="education-entry"></div>';
-var HTMLschoolName = '<a href="#">%data%';
-var HTMLschoolDegree = ' -- %data%</a>';
-var HTMLschoolDates = '<div class="date-text">%data%</div>';
-var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+// var HTMLschoolStart = '<div class="education-entry"></div>';
+// var HTMLschoolName = '<a href="#">%data%';
+// var HTMLschoolDegree = ' -- %data%</a>';
+// var HTMLschoolDates = '<div class="date-text">%data%</div>';
+// var HTMLschoolLocation = '<div class="location-text">%data%</div>';
+// var HTMLschoolMajor = '<em><br>Major: %data%</em>';
 
-var HTMLonlineClasses = '<h3>Online Classes</h3>';
-var HTMLonlineTitle = '<a href="#">%data%';
-var HTMLonlineSchool = ' - %data%</a>';
-var HTMLonlineDates = '<div class="date-text">%data%</div>';
-var HTMLonlineURL = '<br><a href="#">%data%</a>';
+// var HTMLonlineClasses = '<h3>Online Classes</h3>';
+// var HTMLonlineTitle = '<a href="#">%data%';
+// var HTMLonlineSchool = ' - %data%</a>';
+// var HTMLonlineDates = '<div class="date-text">%data%</div>';
+// var HTMLonlineURL = '<br><a href="#">%data%</a>';
 
-var internationalizeButton = '<button>Internationalize</button>';
-var googleMap = '<div id="map"></div>';
+// var internationalizeButton = '<button>Internationalize</button>';
+// var googleMap = '<div id="map"></div>';
 
 
 /*
