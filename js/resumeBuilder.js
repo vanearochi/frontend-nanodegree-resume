@@ -58,7 +58,7 @@ var bioHTMLStrings = {
 	"contacts" : [
 		{
 		"contactGeneric" : '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me</div>',
-		"mobile" : '<ul><a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square text-right">&nbsp <span>%data%</span></li></a>',
+		"mobile" : '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span>%data%</span></li></a>',
  		"email" : '<a href="mailto:vanearochi@gmail.com" ><li class="flex-item fa fa-envelope">&nbsp <span class="textContact">%data%</span></li></a>',
 		"github" : '<a href="https://github.com/vanearochi"><li class="flex-item fa fa-github-square">&nbsp <span class="textContact">%data%</span></li></a>',
  		"twitter" : '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
@@ -74,23 +74,16 @@ var bioHTMLStrings = {
 		{
 			"name": "Instituto Tecnologico de Morelia",
 			"degree": "Bioquemical Engineenering",
-			"dates": 2001,
+			"dates": "2001-2006",
 			"city": "Morelia, Mexico",
 			"major": "BA"
 
-		},
-		{
-			"name": "itm",
-			"degree": "Bioquemical Engineenering",
-			"dates": 2001,
-			"city": "Morelia, Mexico",
-			"major": "BA"
 		}
 	],
 	"onlineCourses": [
 
 	{
-		"h3":"",
+		"h3":"Online Classes",
 		"title": "Intro to HTML and CSS",
 		"school": "Udacity",
 		"dates": "2016",
@@ -120,7 +113,7 @@ var educationHTMLStrings = {
 	],
 	"onlineCourses": [
 		{
-			"h3" :'<h3>Online Classes</h3>',
+			"h3" :'<h3 class="onlineClasses">%data%</h3>',
 			"title":'<a href="#">%data%',
 			"school": ' - %data%</a>',
 			"dates" : '<div class="date-text">%data%</div>',
@@ -134,30 +127,42 @@ var work = {
 		{
 			"employer": "Merck Group",
 			"title": "Sales Application Specialist",
-			"location": "sf",
-			"dates": "1900",
-			"description": "Hola me llamo lola y vengo sola bla bla blas"
+			"location": "Mexico City",
+			"dates": "August 2013-October 2014",
+			"description": "Maintain and increase market share at all assigned area, by building strong customer relationship and understanding the customer's needs and requirement.<br>"+
+			"Responsible for fulfilling and forecasting market need accurately, and meeting assigned sales quota <br>"+
+			"Responsible for new accounts development <br>"+
+			"Development of clients such as: Colgate, Coca Cola, Beiersdorf AG, BASF, Henkel and Unilever"
 		},
 		{
-			"employer": "Bimbo",
-			"title": "Sales Application Specialist",
-			"location":"sf",
-			"dates": "1825",
-			"description": "jkhkhkh"
+			"employer": "Indumex",
+			"title": "Technical Sales Executive",
+			"location":"Mexico City",
+			"dates": "January 2013-August 2013",
+			"description": "Maintain and increase market share in all Mexico <br>"+
+			"Responsible for new accounts development <br>"+
+			"Technical support and participation in customer product development for  subtitution of an existing ingredient or include tour ingredient in a new project, Participating in trials and testing"
 		},
 		{
-			"employer": "Merck Group",
-			"title": "Sales Application Specialist",
-			"location":"sf",
-			"dates": "5413",
-			"description": "oihlhlkjhl"
+			"employer": "Puratos",
+			"title": "RD Manager",
+			"location":"Mexico City",
+			"dates": "January 2011-January 2012",
+			"description": "Responsible for technical projects from experimental design to completion. Including testing, documentation and analytical procedures. <br>"+
+			"Directed activities for development of concepts for future needs of the market <br>"+
+			"Provided technical services to customers, sales, marketing and divisions to ensure alignment with the business strategy"+
+			"Participated in cross regional innovation projects"
 		},
 		{
-			"employer": "Merck Group",
-			"title": "Sales Application Specialist",
-			"location":"sf",
-			"dates": "5452",
-			"description": "jhkhjkhkh"
+			"employer": "Bimbo Bakery Group",
+			"title": "R&D Supervisor",
+			"location":"Mexico City",
+			"dates": "January 2008-May 2010",
+			"description": "Research, formulation and development of new products within time, cost and processing requirements<br>" +
+"Reformulated existing products <br>"+
+"Conducted and leaded physicochemical, sensorial and microbiological analyses of prototypes developed, as well as pilot and industrial test <br>"+
+ "Identified and  implemented cost-saving solutions for the company<br>"+
+ "Provided technical assistance to operation in both cost improvement projects and routine troubleshooting<br>"
 		},
 
 	]
@@ -167,7 +172,7 @@ var workHTMLStrings = {
 	"job": [
 	{
 		"employer" : '<a href="#">%data%',
-	"title" : ' - %data%</a>',
+	"title" : ' %data%</a>',
  	"dates" : '<div class="date-text">%data%</div>',
 	"location" : '<div class="location-text">%data%</div>',
 	"description" : '<p><br>%data%</p>'
@@ -178,29 +183,30 @@ var workHTMLStrings = {
 var project = {
 	"projects": [
 		{
-			"title": "Sample Project 1",
+			"title": "About me",
 			"dates": "2016",
-			"description": "lakjsd",
+			"description": "Project 0 for Udacity Nanodegree. Website in which I worked with basic structure of HTML and CSS",
+			"images": [
+				"",
+				""
+			]
+		},
+		{
+			"title": "Portfolio Site",
+			"dates": "2016",
+			"description": "Project 1 for Udacity Nanodegree. Portfolio site in which I replicated the design given in HTML, CSS and bootstrap.<br>"+
+			"This website is responsible, display images, descriptions and links to each of my portfolio projects and has some interactivity given by Javascript and Jquery.",
+			"images": [
+				"",
+				""
+			]
+		},
+		{
+			"title": "Online Resume",
+			"dates": "2016",
+			"description": "Project 2 for Udacity Nanodegree. ",
 			"images": [
 				"images/vaneUdacity.jpg",
-				""
-			]
-		},
-		{
-			"title": "Sample Project 1",
-			"dates": "2016",
-			"description": "dasd",
-			"images": [
-				"",
-				""
-			]
-		},
-		{
-			"title": "Sample Project 1",
-			"dates": "2016",
-			"description": "asdsad",
-			"images": [
-				"",
 				""
 			]
 		}
@@ -339,6 +345,13 @@ for(index in arrayFooter){
 	substituteAndInsert(arrayFooter[index], "", footerContacts)
 }
 
+// I create this function for eliminate the h3 tags that are empty which basicaly are all the
+var onlineClassesObject = $(".onlineClasses h3:first");
+console.log(onlineClassesObject);
+
+$(".onlineClasses").hide();
+$(".onlineClasses:first").show();
+
 
 var mq = window.matchMedia("(min-width: 750px)");
 if(mq.matches){
@@ -346,3 +359,4 @@ if(mq.matches){
 	//$("div").addClass("mediaQ")
 
 }
+

@@ -32,8 +32,9 @@ h6 {
 }
 
 .title{
-  border-bottom-style: solid;
+  //border-bottom-style: solid;
   font-family: 'Quicksand', sans-serif;
+  padding-left: 3%;
 }
 
 
@@ -57,12 +58,12 @@ h6 {
   margin-bottom: 8%;
 }
 .style{
-  padding-top: 3%;
+
   padding-left: 3%;
 
   border-left-color: #337ab7;
-  border-left-width: 0.3em;
-  margin-top: 10%;
+
+  margin-top: 5%;
   width:100%;
   //text-align: center;
 }
@@ -128,6 +129,7 @@ h5 {
 }
 
 .fa{
+
    //color: #34a9cc;
    //font-size:1.5em;
    //font-family:'Quicksand', sans-serif;
@@ -265,11 +267,20 @@ span {
   #skills-h3,
   .biopic {
     display: block;
+    margin-top: 20%;
   }
   .mediaQ{
   padding-top: 0;
   margin-top: 0;
-  border-style: double;
+  //border-style: double;
+}
+
+#footerContacts{
+  padding-right: 0;
+}
+
+.fa{
+  font-size: 1.5em;
 }
 
 }
