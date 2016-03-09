@@ -21,7 +21,7 @@ h6 {
 
 #contacts{
   margin-top: 4%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 .clear-fix {
   overflow: auto;
@@ -59,9 +59,10 @@ h6 {
 }
 .style{
 
-  padding-left: 3%;
+  //padding-left: 3%;
+  padding: 5%;
 
-  border-left-color: #337ab7;
+  //border-left-color: #337ab7;
 
   margin-top: 5%;
   width:100%;
@@ -115,31 +116,35 @@ h5 {
   font-size: 14px;
   //color: #999;
   line-height: 16px;
-  float: left;
+  //display: block;
+
 }
+
+
 
 .location-text {
   font-style: italic;
   font-size: 14px;
   //color: #999;
   line-height: 16px;
-  float: right;
-  padding-right: 10%;
+  //float:right;
+  //padding-right: 10%;
 
 }
 
 .fa{
 
    //color: #34a9cc;
-   //font-size:1.5em;
+   font-size:1em;
    //font-family:'Quicksand', sans-serif;
 
 }
 
 p {
-  font-size: 14px;
+  font-size: 16px;
  // color: #333;
   line-height: 21px;
+  background-color: aliceblue ;
 }
 
 a {
@@ -185,6 +190,18 @@ a {
   //background-color: #4a4a4a;
 }
 
+.subtitle{
+  font-size:1.4em;
+}
+.subtitle1{
+  font-size:1.2em;
+}
+.subtitle,
+.subtitle1,
+.location-text{
+  font-weight: bold;
+}
+
 /* TODO: Replace with image later */
 
 
@@ -216,14 +233,23 @@ img {
   padding: 10px;
 }
 
-span {
-  padding: 5px;
-}
+
+
 
 #lets-connect {
   text-align: center;
 }
 
+.bg-primary{
+  font-size: 1.7em;
+}
+
+.textContact,
+.textSkills{
+  font-size: 1.4em;
+   font-family: 'Quicksand', sans-serif;
+}
+}
 /* Media queries to handle various device widths */
 
 @media only screen and (max-width: 1024px) {
@@ -239,6 +265,13 @@ span {
 }
 
 @media only screen and (max-width: 750px) {
+
+
+  .container-fluid,
+  .row{
+    //background-color: #eee;
+  }
+
   #lets-connect {
     margin-top: 10%;
   }
@@ -263,7 +296,7 @@ span {
 }
 
 
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 751px) {
   #skills-h3,
   .biopic {
     display: block;
@@ -281,6 +314,10 @@ span {
 
 .fa{
   font-size: 1.5em;
+}
+
+.location-text{
+  float: right;
 }
 
 }

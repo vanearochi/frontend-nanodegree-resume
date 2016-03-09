@@ -65,24 +65,24 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     display by looking at the id or at what's written between the <h2> tags.
     -->
         <div class="row">
-            <header id="header" class="center-content clear-fix col-sm-4">
+            <header id="header" class="center-content clear-fix col-sm-4 ">
 
             </header>
             <main class="col-sm-8">
                <div style="clear: both;"></div> <!--Revisa funcionalidad esta linea al final-->
                 <section id="work" class="">
                     <div class=" fa fa-briefcase bg-primary style style text-uppercase">
-                        <span class="lead">Work Experience </span>
+                        <span class="">Work Experience </span>
                     </div>
                 </section>
                 <section id="project" class="">
                     <div class="fa fa-folder  bg-primary mediaQ style text-uppercase">
-                        <span class="lead">Projects</span>
+                        <span class=" ">Projects</span>
                     </div>
               </section>
               <section id="education" class="">
                   <div class="fa fa-graduation-cap bg-primary mediaQ style text-uppercase">
-                      <span class="lead">Education</span>
+                      <span class="">Education</span>
                   </div>
               </section>
              <section id="mapDiv">
@@ -135,9 +135,6 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     }
     if(document.getElementsByTagName('h1').length === 0) {
       document.getElementById('header').style.display = 'none';
-    }
-    if(document.getElementsByTagName('h3').length === 0) {
-      $(".onlineClasses").remove();
     }
 
     if(document.getElementsByClassName('work-entry').length === 0) {

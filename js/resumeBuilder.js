@@ -52,17 +52,17 @@ var bioHTMLStrings = {
 	"skills":[
 		{
 			"skillsTitle" :'<div class="skills  text-uppercase text-center bg-primary">%data%</div>',
-			"skills" : '<div class="flex-grow  skills ">%data%</div>'
+			"skills" : '<div class="flex-grow  skills textSkills ">%data%</div>'
 		}
 	],
 	"contacts" : [
 		{
-		"contactGeneric" : '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me</div>',
-		"mobile" : '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span>%data%</span></li></a>',
+		"contactGeneric" : '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me</div> <ul>',
+		"mobile" : '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span class= "textContact">%data%</span></li></a>',
  		"email" : '<a href="mailto:vanearochi@gmail.com" ><li class="flex-item fa fa-envelope">&nbsp <span class="textContact">%data%</span></li></a>',
 		"github" : '<a href="https://github.com/vanearochi"><li class="flex-item fa fa-github-square">&nbsp <span class="textContact">%data%</span></li></a>',
  		"twitter" : '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
-		"location" : '<a href=""><li class="flex-item fa fa-map-marker">&nbsp %data%</li></a></ul>'
+		"location" : '<a href=""><li class="flex-item fa fa-map-marker">&nbsp <span class="textContact"> %data%</span></li></a></ul>'
 
  //HTMLblog = '<li class="flex-item"><span class="">blog</span><span class="">%data%</span></li>';
  		}
@@ -95,6 +95,27 @@ var bioHTMLStrings = {
 		"school": "Udacity",
 		"dates": 2016,
 		"url": "https://www.udacity.com/course/ud804"
+	},
+	{
+		"h3":"",
+		"title": "Object-Oriented Javascript",
+		"school": "Udacity",
+		"dates": 2016,
+		"url": "https://www.udacity.com/course/ud015"
+	},
+	{
+		"h3":"",
+		"title": "Responsive Images",
+		"school": "Udacity",
+		"dates": 2016,
+		"url": "https://www.udacity.com/course/ud882"
+	},
+	{
+		"h3":"",
+		"title": "Responsive Web Design Fundamentals",
+		"school": "Udacity",
+		"dates": 2016,
+		"url": "https://www.udacity.com/course/ud893"
 	}
 
 	]
@@ -104,8 +125,8 @@ var bioHTMLStrings = {
 var educationHTMLStrings = {
 	"schools":[
 		{
-   			 "name" : '<a href="#">%data%',
-   			 "degree" : ' -- %data%</a>',
+   			"name" : '<a href="#" class="subtitle">%data%</a>',
+   			"degree" : '<div class=subtitle1>%data%</div>',
     		"dates" : '<div class="date-text">%data%</div>',
 			"city" : '<div class="location-text">%data%</div>',
 			"major" : '<em><br>Major: %data%</em>'
@@ -114,8 +135,8 @@ var educationHTMLStrings = {
 	"onlineCourses": [
 		{
 			"h3" :'<h3 class="onlineClasses">%data%</h3>',
-			"title":'<a href="#">%data%',
-			"school": ' - %data%</a>',
+			"title":'<a href="#" class="subtitle">%data%</a>',
+			"school": '<div class="subtitle1">%data%</div>',
 			"dates" : '<div class="date-text">%data%</div>',
 			"url" : '<br><a href="#">%data%</a>'
 		}
@@ -129,40 +150,40 @@ var work = {
 			"title": "Sales Application Specialist",
 			"location": "Mexico City",
 			"dates": "August 2013-October 2014",
-			"description": "Maintain and increase market share at all assigned area, by building strong customer relationship and understanding the customer's needs and requirement.<br>"+
-			"Responsible for fulfilling and forecasting market need accurately, and meeting assigned sales quota <br>"+
-			"Responsible for new accounts development <br>"+
-			"Development of clients such as: Colgate, Coca Cola, Beiersdorf AG, BASF, Henkel and Unilever"
+			"description": "<b>-M</b>aintain and increase market share at all assigned area, by building strong customer relationship and understanding the customer's needs and requirement.<br>"+
+			"<b>-R</b>esponsible for fulfilling and forecasting market need accurately, and meeting assigned sales quota <br>"+
+			"<b>-R</b>esponsible for new accounts development <br>"+
+			"<b>-D</b>evelopment of clients such as: Colgate, Coca Cola, Beiersdorf AG, BASF, Henkel and Unilever"
 		},
 		{
 			"employer": "Indumex",
 			"title": "Technical Sales Executive",
 			"location":"Mexico City",
 			"dates": "January 2013-August 2013",
-			"description": "Maintain and increase market share in all Mexico <br>"+
-			"Responsible for new accounts development <br>"+
-			"Technical support and participation in customer product development for  subtitution of an existing ingredient or include tour ingredient in a new project, Participating in trials and testing"
+			"description": "<b>-M</b>aintain and increase market share in all Mexico <br>"+
+			"<b>-R</b>esponsible for new accounts development <br>"+
+			"<b>-T</b>echnical support and participation in customer product development for  subtitution of an existing ingredient or include tour ingredient in a new project, Participating in trials and testing"
 		},
 		{
 			"employer": "Puratos",
 			"title": "RD Manager",
 			"location":"Mexico City",
 			"dates": "January 2011-January 2012",
-			"description": "Responsible for technical projects from experimental design to completion. Including testing, documentation and analytical procedures. <br>"+
-			"Directed activities for development of concepts for future needs of the market <br>"+
-			"Provided technical services to customers, sales, marketing and divisions to ensure alignment with the business strategy"+
-			"Participated in cross regional innovation projects"
+			"description": "<b>-R</b>esponsible for technical projects from experimental design to completion. Including testing, documentation and analytical procedures. <br>"+
+			"<b>-D</b>irected activities for development of concepts for future needs of the market <br>"+
+			"<b>-P</b>rovided technical services to customers, sales, marketing and divisions to ensure alignment with the business strategy<br>"+
+			"<b>-P</b>articipated in cross regional innovation projects"
 		},
 		{
 			"employer": "Bimbo Bakery Group",
 			"title": "R&D Supervisor",
 			"location":"Mexico City",
 			"dates": "January 2008-May 2010",
-			"description": "Research, formulation and development of new products within time, cost and processing requirements<br>" +
-"Reformulated existing products <br>"+
-"Conducted and leaded physicochemical, sensorial and microbiological analyses of prototypes developed, as well as pilot and industrial test <br>"+
- "Identified and  implemented cost-saving solutions for the company<br>"+
- "Provided technical assistance to operation in both cost improvement projects and routine troubleshooting<br>"
+			"description": "<b>-R</b>esearch, formulation and development of new products within time, cost and processing requirements<br>" +
+"<b>-R</b>eformulated existing products <br>"+
+"<b>-C</b>onducted and leaded physicochemical, sensorial and microbiological analyses of prototypes developed, as well as pilot and industrial test <br>"+
+ "<b>-I</b>dentified and  implemented cost-saving solutions for the company<br>"+
+ "<b>-P</b>rovided technical assistance to operation in both cost improvement projects and routine troubleshooting<br>"
 		},
 
 	]
@@ -171,11 +192,11 @@ var work = {
 var workHTMLStrings = {
 	"job": [
 	{
-		"employer" : '<a href="#">%data%',
-	"title" : ' %data%</a>',
- 	"dates" : '<div class="date-text">%data%</div>',
-	"location" : '<div class="location-text">%data%</div>',
-	"description" : '<p><br>%data%</p>'
+		"employer" : '<a href="#" class="subtitle">%data%</a>',
+		"title" : ' <div class="subtitle1">%data%</div>',
+ 		"dates" : '<div class="date-text">%data%</div>',
+		"location" : '<div class="location-text">%data%</div>',
+		"description" : '<p class="text-justify"><br>%data%</p>'
 	}
 	]
 }
@@ -216,9 +237,9 @@ var project = {
 var projectsHTMLStrings = {
 	"projects": [
 		{
-			"title" : '<a href="#">%data%</a>',
+			"title" : '<a href="#" class="subtitle">%data%</a>',
  			"dates" : '<div class="date-text">%data%</div>',
-			"description" : '<p><br>%data%</p>',
+			"description" : '<p class="text-justify"><br>%data%</p>',
 			"images" : '<img src="%data%">'
 		}
 	]
