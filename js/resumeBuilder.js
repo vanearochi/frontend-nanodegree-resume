@@ -129,7 +129,7 @@ var educationHTMLStrings = {
    			"degree" : '<div class=subtitle1>%data%</div>',
     		"dates" : '<div class="date-text">%data%</div>',
 			"city" : '<div class="location-text">%data%</div>',
-			"major" : '<em><br>Major: %data%</em>'
+			"major" : '<em>Major: %data%</em>'
 		}
 	],
 	"onlineCourses": [
@@ -138,7 +138,7 @@ var educationHTMLStrings = {
 			"title":'<a href="#" class="subtitle">%data%</a>',
 			"school": '<div class="subtitle1">%data%</div>',
 			"dates" : '<div class="date-text">%data%</div>',
-			"url" : '<br><a href="#">%data%</a>'
+			"url" : '<a href="#" class="schoolLink">%data%</a>'
 		}
 	]
 }
@@ -206,7 +206,8 @@ var project = {
 		{
 			"title": "About me",
 			"dates": "2016",
-			"description": "Project 0 for Udacity Nanodegree. Website in which I worked with basic structure of HTML and CSS",
+			"description": "<b>-P</b>roject 0 for Udacity Nanodegree.<br>"+
+			"<b>-W</b>ebsite in which I worked with basic structure of HTML and CSS",
 			"images": [
 				"",
 				""
@@ -215,8 +216,8 @@ var project = {
 		{
 			"title": "Portfolio Site",
 			"dates": "2016",
-			"description": "Project 1 for Udacity Nanodegree. Portfolio site in which I replicated the design given in HTML, CSS and bootstrap.<br>"+
-			"This website is responsible, display images, descriptions and links to each of my portfolio projects and has some interactivity given by Javascript and Jquery.",
+			"description": "<b>-P</b>roject 1 for Udacity Nanodegree. Portfolio site in which I replicated the design given in HTML, CSS and bootstrap.<br>"+
+			"-<b>T</b>his website is responsible, display images, descriptions and links to each of my portfolio projects and has some interactivity given by Javascript and Jquery.",
 			"images": [
 				"",
 				""
@@ -225,7 +226,7 @@ var project = {
 		{
 			"title": "Online Resume",
 			"dates": "2016",
-			"description": "Project 2 for Udacity Nanodegree. ",
+			"description": "<b>-P</b>roject 2 for Udacity Nanodegree. ",
 			"images": [
 				"images/vaneUdacity.jpg",
 				""
@@ -365,6 +366,10 @@ for(index in arrayFooter){
 	console.log(bioHTMLStrings.contacts[0].email);
 	substituteAndInsert(arrayFooter[index], "", footerContacts)
 }
+
+var footerElement =$("#footerContacts li.fa");
+footerElement.addClass("footerIcons");
+
 
 // I create this function for eliminate the h3 tags that are empty which basicaly are all the
 var onlineClassesObject = $(".onlineClasses h3:first");

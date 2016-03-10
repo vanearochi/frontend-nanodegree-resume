@@ -85,10 +85,11 @@ h2 {
 }
 
 h3 {
-  font-style: italic;
-  font-size: 20px;
+  //font-style: italic;
+  font-size: 22px;
   //color: #000;
   line-height: 22px;
+  font-weight: bold;
 }
 
 h4 {
@@ -99,7 +100,6 @@ h4 {
 }
 
 h2,
-h3,
 h4,
 h5 {
   padding:10px 5%;
@@ -112,10 +112,11 @@ h5 {
 
 
 .date-text {
-  font-style: italic;
+ // font-style: italic;
+  //margin-bottom: 3%;
   font-size: 14px;
   //color: #999;
-  line-height: 16px;
+  line-height: inherit;
   //display: block;
 
 }
@@ -123,7 +124,7 @@ h5 {
 
 
 .location-text {
-  font-style: italic;
+  //font-style: italic;
   font-size: 14px;
   //color: #999;
   line-height: 16px;
@@ -136,21 +137,22 @@ h5 {
 
    //color: #34a9cc;
    font-size:1em;
-   //font-family:'Quicksand', sans-serif;
+   //
 
 }
 
 p {
-  font-size: 16px;
+  font-size:18px;
  // color: #333;
-  line-height: 21px;
-  background-color: aliceblue ;
+  line-height: 1.7em;
+  background-color: #f2f6fb ;
+
 }
 
 a {
  // color: #1199c3;
   text-decoration: none;
-  margin-top: 10px;
+  margin-top: 1em;
   display: block;
 }
 
@@ -190,8 +192,14 @@ a {
   //background-color: #4a4a4a;
 }
 
+.blueTitle{
+  font-family:'Quicksand', sans-serif;
+  font-weight: bold;
+  //margin-bottom: 10em;
+}
+
 .subtitle{
-  font-size:1.4em;
+  font-size:1.5em;
 }
 .subtitle1{
   font-size:1.2em;
@@ -264,7 +272,11 @@ img {
   }
 }
 
-@media only screen and (max-width: 750px) {
+.style{
+  font-size: 2em;
+}
+
+@media only screen and (max-width: 800px) {
 
 
   .container-fluid,
@@ -296,7 +308,7 @@ img {
 }
 
 
-@media only screen and (min-width: 751px) {
+@media only screen and (min-width: 801px) {
   #skills-h3,
   .biopic {
     display: block;
@@ -313,11 +325,24 @@ img {
 }
 
 .fa{
-  font-size: 1.5em;
+  //font-size: 2em;
 }
 
 .location-text{
   float: right;
+  font-weight: normal;
+}
+
+
+.subtitle1,
+.date-text,
+.location-text{
+  letter-spacing: 0.2em
+}
+
+.footerIcons{
+  font-size: 2em;
+
 }
 
 }
