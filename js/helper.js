@@ -97,7 +97,7 @@ https://developers.google.com/maps/documentation/javascript/reference
 */
 var map;    // declares a global map variable
 
-
+ console.log(bio)
 /*
 Start here! initializeMap() is called when page is loaded.
 */

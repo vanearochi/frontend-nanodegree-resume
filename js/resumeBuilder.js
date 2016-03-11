@@ -2,6 +2,8 @@
 This is empty on purpose! Your code to build the resume will go here.
  */
 
+ $(document).ready(function() {
+
 var bio = {
  	"header":[
 	{
@@ -75,7 +77,7 @@ var bioHTMLStrings = {
 			"name": "Instituto Tecnologico de Morelia",
 			"degree": "Bioquemical Engineenering",
 			"dates": "2001-2006",
-			"city": "Morelia, Mexico",
+			"city": "Morelia",
 			"major": "BA"
 
 		}
@@ -208,9 +210,11 @@ var project = {
 			"dates": "2016",
 			"description": "<b>-P</b>roject 0 for Udacity Nanodegree.<br>"+
 			"<b>-W</b>ebsite in which I worked with basic structure of HTML and CSS",
+			"imageContainer":"",
 			"images": [
-				"",
-				""
+				"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Screen+Shot+2016-01-15+at+3.png",
+				"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Screen+Shot+2016-01-15+at+3.png",
+				"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Screen+Shot+2016-01-15+at+3.png"
 			]
 		},
 		{
@@ -218,6 +222,7 @@ var project = {
 			"dates": "2016",
 			"description": "<b>-P</b>roject 1 for Udacity Nanodegree. Portfolio site in which I replicated the design given in HTML, CSS and bootstrap.<br>"+
 			"-<b>T</b>his website is responsible, display images, descriptions and links to each of my portfolio projects and has some interactivity given by Javascript and Jquery.",
+			"imageContainer":"",
 			"images": [
 				"",
 				""
@@ -227,6 +232,7 @@ var project = {
 			"title": "Online Resume",
 			"dates": "2016",
 			"description": "<b>-P</b>roject 2 for Udacity Nanodegree. ",
+			"imageContainer":"",
 			"images": [
 				"images/vaneUdacity.jpg",
 				""
@@ -241,11 +247,13 @@ var projectsHTMLStrings = {
 			"title" : '<a href="#" class="subtitle">%data%</a>',
  			"dates" : '<div class="date-text">%data%</div>',
 			"description" : '<p class="text-justify"><br>%data%</p>',
-			"images" : '<img src="%data%">'
+			"imageContainer": '<div class="row image-container">',
+			"images" : '<div class="col-md-4 project-images"><img src="%data%" class="img-responsive"></div></div>'
 		}
 	]
 }
 
+var googleMap = '<div id="map"></div>';
 
 var arrayObjectsInfo = [bio, education, work, project];
 //console.log(arrayObjectsInfo)
@@ -272,22 +280,20 @@ console.log("Hello Vane")
 
 
 
-
-
-
-
-
-
-
-
-
-
 function substituteAndInsert(HTMLstring, info, classOrID){
-	//console.log(HTMLstring);
+	console.log(HTMLstring);
 	//console.log(info);
+	var regex = /project-images/
+	if(HTMLstring.match(regex)){
+			var changeData= HTMLstring.replace("%data%", info);
+			var appendData= $(".image-container:last").append(changeData);
+	}
+	else{
+			var changeData= HTMLstring.replace("%data%", info);
+			var appendData= $(classOrID).append(changeData);
+		}
 
-	var changeData= HTMLstring.replace("%data%", info);
-	var appendData= $(classOrID).append(changeData);
+
 
 }
 
@@ -385,4 +391,8 @@ if(mq.matches){
 	//$("div").addClass("mediaQ")
 
 }
+
+});
+
+
 
