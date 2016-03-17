@@ -1,17 +1,17 @@
-/*
+/**
 This is empty on purpose! Your code to build the resume will go here.
  */
 
- $(document).ready(function() {
+$(document).ready(function() {
+/**  information and the HTML strings to be appended to each big section so can apply functions and don't repeat the code for the resume creation*/
 
-var bio = {
- 	"header":[
-	{
-		"bioPic" : "https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/vaneUdacityp2.jpg",
-		"name" : "Vanessa Arochi",
-		"role" : "Web Developer",
-
-	}
+ var bio = {
+ 		"header":[
+		{
+			"bioPic" : "https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/vaneUdacityp2.jpg",
+			"name" : "Vanessa Arochi",
+			"role" : "Web Developer",
+		}
 	],
 	"message":[
 		{
@@ -169,7 +169,7 @@ var work = {
 		{
 			"employer": "Puratos",
 			"title": "RD Manager",
-			"location":"Mexico City",
+			"location":"Hidalgo",
 			"dates": "January 2011-January 2012",
 			"description": "<b>-R</b>esponsible for technical projects from experimental design to completion. Including testing, documentation and analytical procedures. <br>"+
 			"<b>-D</b>irected activities for development of concepts for future needs of the market <br>"+
@@ -224,7 +224,7 @@ var project = {
 			"-<b>T</b>his website is responsible, display images, descriptions and links to each of my portfolio projects and has some interactivity given by Javascript and Jquery.",
 			"imageContainer":"",
 			"images": [
-				"",
+				"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.32.13+PM.png",
 				""
 			]
 		},
@@ -234,7 +234,7 @@ var project = {
 			"description": "<b>-P</b>roject 2 for Udacity Nanodegree. ",
 			"imageContainer":"",
 			"images": [
-				"images/vaneUdacity.jpg",
+				"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.36.03+PM.png",
 				""
 			]
 		}
@@ -255,56 +255,154 @@ var projectsHTMLStrings = {
 
 var googleMap = '<div id="map"></div>';
 
+var actualLocation = bio.contacts[0].location;
+//takeTheLocationInfo(actualLocation)
+console.log(actualLocation)
+
+/**Array with that contains the Objects that contain the data that fills the HTML strings*/
 var arrayObjectsInfo = [bio, education, work, project];
+
 //console.log(arrayObjectsInfo)
+/**Array that contain the name of the id in which the HTMLstrings will be appended*/
 var arrayObjectsStr = ["header", "education", "work", "project"];
  casa = arrayObjectsInfo[0].constructor.name;
 //console.log(arrayObjectsInfo[0]);
+/**Array that contain the Objects that contain the HTML strings that will fill the resume page*/
 var arrayObjectsHTML = [bioHTMLStrings, educationHTMLStrings, workHTMLStrings, projectsHTMLStrings]
 
+
+/**
+ * Function that iterates over arrays and calls getTheInfoForTheSection function
+
+ * @param {array} arrInfo - Array that contains the Object that have the info to fill the page
+ 							(arrayObjectsInfo)
+ * @param {array} arrHTML -	Array that contains the Object that have the HTML strings that will give
+ 							the HTML structure of the page(arrayObjectsHTML)
+ * @param {array} arrStr  - Array that contains the string id of each big sections
+ */
 function iterateArrays(arrInfo, arrHTML, arrStr){
 	var howManyObjects = arrInfo.length;
-	console.log(howManyObjects);
+	//console.log(howManyObjects);
 	for(var i = 0; i<howManyObjects; i++){
 		//console.log("n")
 		//console.log(arrayObjectsInfo[i] + arrayObjectsHTML[i] + arrStr[i])
-		takeTheSubtituteInfo(arrayObjectsInfo[i], arrayObjectsHTML[i], arrStr[i]);
+		getTheInfoForTheSection(arrayObjectsInfo[i], arrayObjectsHTML[i], arrStr[i]);
 	}
 
 }
-iterateArrays(arrayObjectsInfo, arrayObjectsHTML, arrayObjectsStr);
 
-var data = "%data%"
-console.log("Hello Vane")
+/** @function getTheInfoForTheSection*/
+/**
+ * Function that iterate over Objects getting data and HTML strings of them that will be appended to their corresponding big sections.
+ * Creates the jQuerySelector variable.
+ * Calls to createNewSection & getTheInfoForTheSection
+ * @param {object} objectInfo - Object that contains the info that will fill the resume
+ 							    (bio, education, work or project)
+ * @param {object} objectHTML - Object that contains the HTML strings that will give the HTML structure of the resume
+                                (bioHTMLStrings, educationHTMLStrings, workHTMLStrings or projectsHTMLStrings)
+ * @param {string} idSectionName - id of each big section of the page
+ 								   (header, work, project or education)
+ */
+function getTheInfoForTheSection (objectInfo, objectHTML, idSectionName){
+		console.log(idSectionName);
+		/**
+		 * A variable called 'topLevelObjectInfoKeys'
+		 * @var {array} topLevelObjectInfoKeys */
+		var topLevelObjectInfoKeys = givemeTheKeys(objectInfo);
+		console.log(topLevelObjectInfoKeys);
+		var topLevelObjectHTMLKeys = givemeTheKeys(objectHTML);
+		console.log(topLevelObjectHTMLKeys)
+		var jQuerySelector = "."+idSectionName+"-entry:last";
+
+		for(var h=0; h<topLevelObjectInfoKeys.length; h++){
+				/**
+				 * This array will give us the number of subsections inside each big section
+				 * @var {array} indexOfArrOfTopLevelObjInfoKey
+				*/
+				var indexOfArrOfTopLevelObjInfoKey=givemeTheKeys(objectInfo[topLevelObjectInfoKeys[h]])
+					console.log(indexOfArrOfTopLevelObjInfoKey)
+				/**
+				 * A variable
+				 * @var {array} keysOfTheObjInArrOfTopLevelKey
+				 *
+				*/
+				var keysOfTheObjInArrOfTopLevelKey=givemeTheKeys(objectInfo[topLevelObjectInfoKeys[h]][0])
+					console.log(keysOfTheObjInArrOfTopLevelKey)
+				/**
+				 *This loop will create a new subsection on the corresponding big section depending on the number of indexes on the indexOfArrOfTopLevelObjInfoKey
+				*/
+				for (var i = 0; i<indexOfArrOfTopLevelObjInfoKey.length; i++){
+						createNewSection(idSectionName);
+				/**In this loop we will get the HTML string and the data that corresponds to it*/
+						for(var j = 0; j<keysOfTheObjInArrOfTopLevelKey.length; j++){
+								var infoStr = objectInfo[topLevelObjectInfoKeys[h]][i][keysOfTheObjInArrOfTopLevelKey[j]]
+								var HTMLstr = objectHTML[topLevelObjectHTMLKeys[h]][0][keysOfTheObjInArrOfTopLevelKey[j]];
+								/**
+								 * If infoStr is an Array Then we iterate over it and get each element on it and place it in its corrssponding
+								   HTML string(HTMLstr)
+								*/
+								if(Array.isArray(infoStr)){
+										for(info in infoStr){
+												substituteAndInsert(HTMLstr, infoStr[info], jQuerySelector);
+										}
+								}
+								else{
+										substituteAndInsert(HTMLstr, infoStr, jQuerySelector);
+								}
+						}
+				}
+		}
 
 
+}
 
-
+/** @function substituteAndInsert
+ * Function that will replace a piece of the HTML string with a new string passed as an argument and will append it to his corresponding  big section
+ * @param {string} HTMLstring HTML string that will be appended to a big section
+ * @param {string} info       String with the information that will be inserted on the HTMLstring
+ * @param {string} classOrID  String with the class or id name that will be used as a jQuery selector to appen the HTMLstring
+*/
 function substituteAndInsert(HTMLstring, info, classOrID){
-	console.log(HTMLstring);
-	//console.log(info);
-	var regex = /project-images/
-	if(HTMLstring.match(regex)){
-			var changeData= HTMLstring.replace("%data%", info);
-			var appendData= $(".image-container:last").append(changeData);
-	}
-	else{
-			var changeData= HTMLstring.replace("%data%", info);
-			var appendData= $(classOrID).append(changeData);
+		var regexImg = /project-images/;
+		var regexLoc = /location-text/;
+		var changeData;
+		var appendData;
+
+		/**As each image have the same name we will need to specify to append it to the last one.*/
+		if(HTMLstring.match(regexImg)){
+				changeData= HTMLstring.replace("%data%", info);
+				appendData= $(".image-container:last").append(changeData);
+		}
+		/** This condition checks if the HTMLstring has location-text on it, if it does it will pass the info to takeLocationInfo for the markers map */
+		else if(HTMLstring.match(regexLoc)){
+				takeTheLocationInfo(info);
+				changeData= HTMLstring.replace("%data%", info);
+				appendData= $(classOrID).append(changeData);
+		}
+		else{
+				changeData= HTMLstring.replace("%data%", info);
+				appendData= $(classOrID).append(changeData);
 		}
 
 
 
 }
 
-function createNewStart (sectionName){
-		var startHTML = "<div class='"+sectionName+"-entry'></div>"
-		//console.log(startHTML);
+/** @function createNewSection
+ * Function that creates a new entry for a big section (header, work, project or education)
+ * @param {string} sectionName the name of the big section in which the new entry is going to be appended
+                               this name is used to create the new entry's class name
+*/
+function createNewSection (sectionName){
+		var startHTML = "<div class='"+sectionName+"-entry'></div>";
 		$("#"+sectionName).append(startHTML);
 
 	}
 
-
+/** @function givemeTheKeys
+ * Function that gives the keys of an Object
+ * @param {object} object Object of which we would like to obtain the keys of
+*/
 function givemeTheKeys (object){
 	//console.log(object);
 	var keys = Object.keys(object);
@@ -312,87 +410,91 @@ function givemeTheKeys (object){
 }
 
 
-
+/**Function that gives the number of keys of a particular Object*/
 function givemeTheNumberOfKeys (object){
-	var objectKeys = Object.keys(object);
-	return objectKeys.length;
+		var objectKeys = Object.keys(object);
+		return objectKeys.length;
 }
 
 
-
-
-function takeTheSubtituteInfo (objectInfo, objectHTML, objectName){
-			console.log("si");
-			console.log(objectInfo);
-		var firstKeyObjectInfo = givemeTheKeys(objectInfo);
-			//console.log(firstKeyObjectInfo);
-			//var arrayObjectInfoKeys= givemeTheKeys(objectInfo[firstKeyObjectInfo[0]]);
-
-			//console.log(arrayObjectInfoKeys);
-		var n = "";
-		//var secondKeyObjectInfo = givemeTheKeys(objectInfo[firstKeyObjectInfo[0]][0]);
-			//console.log(secondKeyObjectInfo);
-		var firstKeyObjectHTML = givemeTheKeys(objectHTML);
-		//console.log(firstKeyObjectHTML);
-		var className = "."+objectName+"-entry:last";
-		//console.log(firstKeyObjectHTML[0].length);
-		//console.log(firstKeyObjectHTML)
-		//for (var h = 0; h<firstKeyObjectHTML.length; h++){
-
-		//if(firstKeyObjectInfo.length>1){
-			for(var h=0; h<firstKeyObjectInfo.length; h++){
-			var arrayObjectInfoKeys=givemeTheKeys(objectInfo[firstKeyObjectInfo[h]])
-			var secondKeyObjectInfo=givemeTheKeys(objectInfo[firstKeyObjectInfo[h]][0])
-			for (var i = 0; i<arrayObjectInfoKeys.length; i++){
-					//console.log(objectName)
-				createNewStart(objectName);
-				for(var j = 0; j<secondKeyObjectInfo.length; j++){
-					var infoStr = objectInfo[firstKeyObjectInfo[h]][i][secondKeyObjectInfo[j]]
-					var HTMLstr = objectHTML[firstKeyObjectHTML[h]][0][secondKeyObjectInfo[j]];
-					if(Array.isArray(infoStr)){
-						for(info in infoStr){
-							console.log(infoStr[info]);
-							substituteAndInsert(HTMLstr, infoStr[info], className);
-						}
-					}
-					else{
-					//console.log(infoStr);
-							//console.log(HTMLstr + infoStr + className + "append")
-						substituteAndInsert(HTMLstr, infoStr, className);
-						}
-				}
-			}
-			}
-
-
-}
-
+/**Array that contain the value of media contact of the Object bio*/
 var arrayFooter = [bioHTMLStrings.contacts[0].email, bioHTMLStrings.contacts[0].twitter, bioHTMLStrings.contacts[0].github]
+
+/**Loop that iterate over the arrayFooter and calls substituteAndInsert function for each value*/
 for(index in arrayFooter){
-	console.log(bioHTMLStrings.contacts[0].email);
-	substituteAndInsert(arrayFooter[index], "", footerContacts)
+		substituteAndInsert(arrayFooter[index], "", footerContacts)
 }
 
+/**As the values that contain arrayFooter are the same used for the contact subsection we need to add a class for the elements
+in the footer section to diferenciate them and target them for style*/
 var footerElement =$("#footerContacts li.fa");
 footerElement.addClass("footerIcons");
 
-
-// I create this function for eliminate the h3 tags that are empty which basicaly are all the
-var onlineClassesObject = $(".onlineClasses h3:first");
-console.log(onlineClassesObject);
-
+// The code below hide the h3 tags that are empty on the education subsection:OnlineClasses*/
 $(".onlineClasses").hide();
 $(".onlineClasses:first").show();
 
 
 var mq = window.matchMedia("(min-width: 750px)");
 if(mq.matches){
-	console.log("ja")
-	//$("div").addClass("mediaQ")
 
 }
 
+/**Map section*/
+var map;
+
+/** @function createNewMap
+ * Function that creates a new google map
+ * @param {object} json Object with the information of a certain location
+ */
+var createNewMap = function(json){
+		var location=json.results[0].geometry.location;
+	 	map = new google.maps.Map(mapDiv, {
+      			center: location,
+      			zoom: 3
+    	});
+
+		addMarker(location, map);
+}
+
+/** @function addMArker
+ * @param {object} location object that contains the latitude and longitude of a certain location
+ * @param {object} map      object that contains the information of a google map
+Function that creates the Marker for the map with the locations available in the resume*/
+function addMarker(location, map) {
+  		var marker = new google.maps.Marker({
+    			position: location,
+    			map: map
+  		});
+}
+
+$.ajax({
+ 		url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:SanFrancisco&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
+ 		success: createNewMap
+ })
+
+/** @function takeTheLocationInfo
+  * Function that request an ajax to get a json with the information of a location given as a parameter
+  * @param {string} location String
+*/
+function takeTheLocationInfo(location){
+		$.ajax({
+				url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:"+location+"&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
+				success: parseMarker
+		})
+}
+
+/** @function parseMarker
+ * Function that get the coordinates of the location from the json passed as argument
+ * @param {object} json object with the information of a certain location
+*/
+function parseMarker(json){
+		var locationCord=json.results[0].geometry.location;
+		addMarker(locationCord, map);
+
+}
+
+
+iterateArrays(arrayObjectsInfo, arrayObjectsHTML, arrayObjectsStr);
+
 });
-
-
-
