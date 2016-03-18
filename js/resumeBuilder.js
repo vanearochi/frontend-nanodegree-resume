@@ -440,6 +440,8 @@ $(document).ready(function() {
 
 		/**Map section*/
 
+		/**As I wanted to learn about google maps I study a bit the documentation of it and apply it in a different way*/
+
 		var map;
 
 		/** @function createNewMap
