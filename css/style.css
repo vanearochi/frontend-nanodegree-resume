@@ -307,7 +307,7 @@ img {
 }
 
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 768px) {
 
   #lets-connect {
 
@@ -320,6 +320,7 @@ img {
 
     width: 150px;
     display: none;
+
   }
 
 
@@ -330,20 +331,10 @@ img {
   }
 
 
-
-  //display: block;
-  //height: 100%;
-  //margin: 0 5%;
-
-  }
-
-
-
-
 }
 
 
-@media only screen and (min-width: 801px) {
+@media only screen and (min-width: 769px) {
 
   #skills-h3,
   .biopic {
@@ -386,7 +377,7 @@ img {
 
   .footerIcons{
 
-    font-size: 2em;
+    font-size: 2.7em;
 
   }
 
