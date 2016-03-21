@@ -339,7 +339,7 @@ $(document).ready(function() {
 
 														substituteAndInsert(HTMLstr, infoStr[info], selector);
 
-												};
+												}
 										}
 
 										else {
@@ -347,8 +347,8 @@ $(document).ready(function() {
 												substituteAndInsert(HTMLstr, infoStr, selector);
 
 										}
-								};
-						};
+								}
+						}
 				};
 
 		}
@@ -460,7 +460,7 @@ $(document).ready(function() {
 
 				addMarker(location, map);
 
-		};
+		}
 
 		/** @function addMArker
 		 * Creates markers in the map with the locations available in the resume
