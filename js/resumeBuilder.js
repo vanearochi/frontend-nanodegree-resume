@@ -18,9 +18,9 @@ $(document).ready(function() {
 							 		"twitter": '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
 									"location": '<a href=""><li class="flex-item fa fa-map-marker">&nbsp <span class="textContact"> %data%</span></li></a></ul>',
 							},
-							"welcomeMsg": '<span class="welcome-message">%data%</span>',
+							"welcomeMessage": '<span class="welcome-message">%data%</span>',
 							"skills": '<div class="flex-grow  skills textSkills ">%data%</div>',
-							"bioPic": '<div class="col-md-12 "><img src="%data%" class="biopic img-responsive img-circle"></div>'
+							"biopic": '<div class="col-md-12 "><img src="%data%" class="biopic img-responsive img-circle"></div>'
 
 						}
 
@@ -36,20 +36,20 @@ $(document).ready(function() {
 									"twitter": "vanearochi",
 									"location": "San Francisco",
 							},
-							"welcomeMsg": "Hello my name is Vanessa Arochi",
+							"welcomeMessage": "Hello my name is Vanessa Arochi",
 							"skills": [
 				 					"Project Managing", "Programming", "Sales", "Product Developing"
 				 			],
-						    "bioPic": "https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/vaneUdacityp2.jpg",
+						    "biopic": "https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/vaneUdacityp2.jpg",
 							display: function(){
 
-									var keysInfo= givemeTheKeys(bio);
+									var keysInfoBio= givemeTheKeys(bio);
 									//console.log(keys);
-									var keysHTML = givemeTheKeys(bioHTMLStrings);
+									var keysHTMLBio = givemeTheKeys(bioHTMLStrings);
 									//console.log(keys1);
 
 
-									keysHTML.forEach(function(val){
+									keysHTMLBio.forEach(function(val){
 										createNewSection("header");
 										var HTMLstring = bioHTMLStrings[val];
 
@@ -71,7 +71,7 @@ $(document).ready(function() {
 													console.log(bio[val][0]);
 
 												}
-												else if(val==="bioPic"){
+												else if(val==="biopic"){
 													console.log("pic")
 													substituteAndInsert(bioHTMLStrings[val], bio[val], "#header")
 												}
@@ -93,29 +93,50 @@ $(document).ready(function() {
 
 		};
 
-		bio.display();
+		//bio.display();
+
+		var educationHTMLStrings = {
+
+				"schools":
+						{
+				   			"name": '<a href="#" class="subtitle">%data%</a>',
+				   			"location": '<div class="location-text">%data%</div>',
+				   			"degree": '<div class=subtitle1>%data%</div>',
+				    		"majors": '<em>Major: %data%</em>',
+				    		"dates": '<div class="date-text">%data%</div>',
+				    		"url" : '<a href="#" class="schoolLink">%data%</a>'
 
 
+						}
+				,
+				"onlineCourses":
+						{
+							//"h3":'<h3 class="onlineClasses">%data%</h3>',
+							"title":'<a href="#" class="subtitle">%data%</a>',
+							"school": '<div class="subtitle1">%data%</div>',
+							"dates": '<div class="date-text">%data%</div>',
+							"url": '<a href="#" class="schoolLink">%data%</a>'
+						}
+
+		};
 
 		var education = {
 
 				"schools" : [
 						{
 							"name": "Instituto Tecnologico de Morelia",
-							"city": "Morelia",
+							"location": "Morelia",
 							"degree": "Bioquemical Engineenering",
 							"majors": "[BA]",
 							"dates": "2001-2006",
 							"url": ""
-
-
 						}
 				],
 				"onlineCourses": [
 						{
 							"title": "Intro to HTML and CSS",
 							"school": "Udacity",
-							"dates": "2016",
+							"date": "2016",
 							"url": "https://www.udacity.com/course/ud304"
 						},
 						{
@@ -142,30 +163,55 @@ $(document).ready(function() {
 							"dates": 2016,
 							"url": "https://www.udacity.com/course/ud893"
 						}
-				]
-
-		};
-
-		var educationHTMLStrings = {
-
-				"schools":[
-						{
-				   			"name": '<a href="#" class="subtitle">%data%</a>',
-				   			"degree": '<div class=subtitle1>%data%</div>',
-				    		"dates": '<div class="date-text">%data%</div>',
-							"city": '<div class="location-text">%data%</div>',
-							"major": '<em>Major: %data%</em>'
-						}
 				],
-				"onlineCourses": [
+
+				display: function(){
+
+					var subsectionKeys = givemeTheKeys(educationHTMLStrings);
+					var keysInSubsectionSchools = givemeTheKeys(educationHTMLStrings[subsectionKeys[0]]);
+					var keysInSubsectionOnline =  givemeTheKeys(educationHTMLStrings[subsectionKeys[1]]);
+
+					education.schools.forEach(function(val){
+							//console.log(val["name"])
+							createNewSection("education")
+							keysInSubsectionSchools.forEach(function(value){
+								var HTMLEduStr = educationHTMLStrings.schools[value]
+								var infoEdu = val[value];
+								//console.log(infoEdu);
+								substituteAndInsert(HTMLEduStr, infoEdu, ".education-entry:last")
+							})
+							// var schoolInfo= education.schools[0]
+							// console.log(schoolInfo);
+							// substituteAndInsert(bioHTMLStrings[val], bio[val], ".header-entry:last")
+
+
+					})
+					education.onlineCourses.forEach(function(val){
+					 	keysInSubsectionOnline.forEach(function(value){
+					 		var HTMLOnlineStr= educationHTMLStrings.onlineCourses[value]
+					 		console.log(HTMLOnlineStr)
+					 		var infoOnline = val[value];
+					 		console.log(infoOnline)
+					 		substituteAndInsert(HTMLOnlineStr, infoOnline, ".education-entry:last")
+					 	})
+					 });
+				 }
+
+		}
+
+		education.display();
+
+		var workHTMLStrings = {
+
+					"job": [
 						{
-							"h3":'<h3 class="onlineClasses">%data%</h3>',
-							"title":'<a href="#" class="subtitle">%data%</a>',
-							"school": '<div class="subtitle1">%data%</div>',
-							"dates": '<div class="date-text">%data%</div>',
-							"url": '<a href="#" class="schoolLink">%data%</a>'
+							"employer" : '<a href="#" class="subtitle">%data%</a>',
+							"title" : ' <div class="subtitle1">%data%</div>',
+					 		"location" : '<div class="location-text">%data%</div>',
+					 		"dates" : '<div class="date-text">%data%</div>',
+							"description" : '<p class="text-justify"><br>%data%</p>'
 						}
-				]
+					]
 		};
 
 		var work = {
@@ -212,21 +258,13 @@ $(document).ready(function() {
 							"<b>-P</b>rovided technical assistance to operation in both cost improvement projects and routine troubleshooting<br>"
 						},
 
-					]
+					],
+
+
+
 		};
 
-		var workHTMLStrings = {
 
-					"job": [
-						{
-							"employer" : '<a href="#" class="subtitle">%data%</a>',
-							"title" : ' <div class="subtitle1">%data%</div>',
-					 		"dates" : '<div class="date-text">%data%</div>',
-							"location" : '<div class="location-text">%data%</div>',
-							"description" : '<p class="text-justify"><br>%data%</p>'
-						}
-					]
-		};
 
 		var project = {
 
@@ -334,7 +372,7 @@ $(document).ready(function() {
 						*/
 						var indexSubsectionArr = givemeTheKeys(objectInfo[subsectionInfoKeys[h]]);
 						var dataInSubsectionInfo = givemeTheKeys(objectInfo[subsectionInfoKeys[h]][0]);
-
+						///console.log()
 						/**
 						 *This loop will create a new subsection on the corresponding parent section depending on the number of indexes on the indexSubsectionArr
 						*/
@@ -347,7 +385,9 @@ $(document).ready(function() {
 
 										var infoStr = objectInfo[subsectionInfoKeys[h]][i][dataInSubsectionInfo[j]];
 										var HTMLstr = objectHTML[subsectionHTMLKeys[h]][0][dataInSubsectionInfo[j]];
-
+											console.log(infoStr)
+											console.log(HTMLstr)
+											console.log(objectHTML[subsectionHTMLKeys[h]][0])
 										/**
 										 * If infoStr is an Array Then we iterate over it and get each element on it and place it in its corrssponding
 										   HTML string(HTMLstr)
@@ -378,12 +418,12 @@ $(document).ready(function() {
 		 * @param {string} classOrID  selector for element where the complete htm will be inse name that will be used as a css selector to appen the HTMLstring
 		*/
 		function substituteAndInsert(HTMLstring, info, classOrID) {
-					console.log(HTMLstring)
-					 console.log(info)
-					 console.log(classOrID)
+					//console.log(HTMLstring)
+					 //console.log(info)
+					 //console.log(classOrID)
 				var regexImg = /project-images/;
 				var regexLoc = /location-text/;
-				var regexBioPic= /biopic/;
+				var regexbiopic= /biopic/;
 				var changeData;
 				var appendData;
 
@@ -403,7 +443,7 @@ $(document).ready(function() {
 				// 		appendData = $(classOrID).append(changeData);
 
 				// }
-				if(HTMLstring.match(regexBioPic)){
+				if(HTMLstring.match(regexbiopic)){
 						console.log("2biopic")
 						changeData = HTMLstring.replace("%data%", info);
 						appendData = $(classOrID).prepend(changeData);
