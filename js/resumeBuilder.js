@@ -1,121 +1,142 @@
+//"use strict"
 /**
-This is empty on purpose! Your code to build the resume will go here.
+
  */
 
 $(document).ready(function() {
 /** All data and HTML strings are inside objects so I could use functions and don't repeat the code thinking on what I learned on the javascript basic course: don't repeat yourself*/
+		var bioHTMLStrings = {
+
+
+
+							"name": '<div class="col-md-12 text-uppercase text-center" id="name"><h1 class="header">%data%</h1></div>',
+							"role": '<div class="col-md-12 text-center role">&nbsp %data%</div><hr>',
+							"contacts":{
+									"mobile": '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span class= "textContact">%data%</span></li></a>',
+							 		"email": '<a href="mailto:vanearochi@gmail.com" ><li class="flex-item fa fa-envelope">&nbsp <span class="textContact">%data%</span></li></a>',
+									"github": '<a href="https://github.com/vanearochi"><li class="flex-item fa fa-github-square">&nbsp <span class="textContact">%data%</span></li></a>',
+							 		"twitter": '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
+									"location": '<a href=""><li class="flex-item fa fa-map-marker">&nbsp <span class="textContact"> %data%</span></li></a></ul>',
+							},
+							"welcomeMsg": '<span class="welcome-message">%data%</span>',
+							"skills": '<div class="flex-grow  skills textSkills ">%data%</div>',
+							"bioPic": '<div class="col-md-12 "><img src="%data%" class="biopic img-responsive img-circle"></div>'
+
+						}
+
 
  		var bio = {
 
-		 		"header":[
-						{
-							"bioPic": "https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/vaneUdacityp2.jpg",
-							"name": "Vanessa Arochi",
+		 					"name": "Vanessa Arochi",
 							"role": "Web Developer",
-						},
-				],
-				"message":[
-						{
-							"welcomeMsg": "Hello my name is Vanessa Arochi"
-						}
-				],
-				"skills":[
-						{
-							"skillsTitle": "Skills",
+							"contacts":{
+									"mobile": "(650) 452 57 67",
+									"email": "vanearochi@gmail.com",
+									"github": "vanearochi",
+									"twitter": "vanearochi",
+									"location": "San Francisco",
+							},
+							"welcomeMsg": "Hello my name is Vanessa Arochi",
 							"skills": [
 				 					"Project Managing", "Programming", "Sales", "Product Developing"
-				 			]
-						}
-				],
-				"contacts" : [
-						{
-							"contactGeneric": '',
-							"mobile": "(650) 452 57 67",
-							"email": "vanearochi@gmail.com",
-							"github": "vanearochi",
-							"twitter": "vanearochi",
-							"location": "San Francisco",
-						}
-				]
+				 			],
+						    "bioPic": "https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/vaneUdacityp2.jpg",
+							display: function(){
+
+									var keysInfo= givemeTheKeys(bio);
+									//console.log(keys);
+									var keysHTML = givemeTheKeys(bioHTMLStrings);
+									//console.log(keys1);
+
+
+									keysHTML.forEach(function(val){
+										createNewSection("header");
+										var HTMLstring = bioHTMLStrings[val];
+
+											//createNewSection("header");
+												if(val==="contacts"){
+														$.each(bio[val], function(key, value){
+															console.log(key, value)
+															var HTMLstringContacts= HTMLstring[key];
+															console.log(HTMLstringContacts)
+															substituteAndInsert(HTMLstringContacts, value, ".header-entry:last")
+														})
+												}
+												else if(val==="skills"){
+													var contactGeneric= '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me</div> <ul>';
+													//createNewSection("header");
+													bio[val].forEach(function(value){
+															substituteAndInsert(HTMLstring, value, ".header-entry:last")
+													})
+													console.log(bio[val][0]);
+
+												}
+												else if(val==="bioPic"){
+													console.log("pic")
+													substituteAndInsert(bioHTMLStrings[val], bio[val], "#header")
+												}
+										else {
+											substituteAndInsert(bioHTMLStrings[val], bio[val], ".header-entry:last")
+										}
+
+
+
+									});
+									//substituteAndInsert(bioHTMLStrings[val], bio[val], ".header-entry:last")
+
+									//"contactGeneric": '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me</div> <ul>',
+									//
+							}
+
+
+
 
 		};
 
-		var bioHTMLStrings = {
+		bio.display();
 
-				"personal": [
-						{
-							"bioPic": '<div class="col-md-12 "><img src="%data%" class="biopic img-responsive img-circle"></div>',
-							"name": '<div class="col-md-12 text-uppercase text-center" id="name"><h1 class="header">%data%</h1></div>',
-							"role": '<div class="col-md-12 text-center role">&nbsp %data%</div><hr>',
-						}
-				],
-				"message":[
-						{
-							"welcomeMsg": '<span class="welcome-message">%data%</span>',
-						}
-				],
-				"skills":[
-						{
-							"skillsTitle": '<div class="skills  text-uppercase text-center bg-primary">%data%</div>',
-							"skills": '<div class="flex-grow  skills textSkills ">%data%</div>'
-						}
-				],
-				"contacts" : [
-						{
-							"contactGeneric": '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me</div> <ul>',
-							"mobile": '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span class= "textContact">%data%</span></li></a>',
-					 		"email": '<a href="mailto:vanearochi@gmail.com" ><li class="flex-item fa fa-envelope">&nbsp <span class="textContact">%data%</span></li></a>',
-							"github": '<a href="https://github.com/vanearochi"><li class="flex-item fa fa-github-square">&nbsp <span class="textContact">%data%</span></li></a>',
-					 		"twitter": '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
-							"location": '<a href=""><li class="flex-item fa fa-map-marker">&nbsp <span class="textContact"> %data%</span></li></a></ul>'
 
-				 		}
-				]
-
-		};
 
 		var education = {
 
 				"schools" : [
 						{
 							"name": "Instituto Tecnologico de Morelia",
-							"degree": "Bioquemical Engineenering",
-							"dates": "2001-2006",
 							"city": "Morelia",
-							"major": "BA"
+							"degree": "Bioquemical Engineenering",
+							"majors": "[BA]",
+							"dates": "2001-2006",
+							"url": ""
+
+
 						}
 				],
 				"onlineCourses": [
 						{
-							"h3": "Online Classes",
 							"title": "Intro to HTML and CSS",
 							"school": "Udacity",
 							"dates": "2016",
 							"url": "https://www.udacity.com/course/ud304"
 						},
 						{
-							"h3": "",
 							"title": "Javascript Basics",
 							"school": "Udacity",
 							"dates": 2016,
 							"url": "https://www.udacity.com/course/ud804"
 						},
 						{
-							"h3": "",
 							"title": "Object-Oriented Javascript",
 							"school": "Udacity",
 							"dates": 2016,
 							"url": "https://www.udacity.com/course/ud015"
 						},
 						{
-							"h3": "",
 							"title": "Responsive Images",
 							"school": "Udacity",
 							"dates": 2016,
 							"url": "https://www.udacity.com/course/ud882"
 						},
 						{
-							"h3": "",
 							"title": "Responsive Web Design Fundamentals",
 							"school": "Udacity",
 							"dates": 2016,
@@ -215,7 +236,6 @@ $(document).ready(function() {
 							"dates": "2016",
 							"description": "<b>-P</b>roject 0 for Udacity Nanodegree.<br>"+
 							"<b>-W</b>ebsite in which I worked with basic structure of HTML and CSS",
-							"imageContainer":"",
 							"images": [
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Screen+Shot+2016-01-15+at+3.png"
 							]
@@ -225,7 +245,6 @@ $(document).ready(function() {
 							"dates": "2016",
 							"description": "<b>-P</b>roject 1 for Udacity Nanodegree. Portfolio site in which I replicated the design given in HTML, CSS and bootstrap.<br>"+
 							"-<b>T</b>his website is responsible, display images, descriptions and links to each of my portfolio projects and has some interactivity given by Javascript and Jquery.",
-							"imageContainer":"",
 							"images": [
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.32.13+PM.png",
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.32.13+PM.png",
@@ -235,7 +254,6 @@ $(document).ready(function() {
 							"title": "Online Resume",
 							"dates": "2016",
 							"description": "<b>-P</b>roject 2 for Udacity Nanodegree. ",
-							"imageContainer":"",
 							"images": [
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.36.03+PM.png",
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.36.03+PM.png",
@@ -360,29 +378,36 @@ $(document).ready(function() {
 		 * @param {string} classOrID  selector for element where the complete htm will be inse name that will be used as a css selector to appen the HTMLstring
 		*/
 		function substituteAndInsert(HTMLstring, info, classOrID) {
-
+					console.log(HTMLstring)
+					 console.log(info)
+					 console.log(classOrID)
 				var regexImg = /project-images/;
 				var regexLoc = /location-text/;
+				var regexBioPic= /biopic/;
 				var changeData;
 				var appendData;
 
 				/**As each image have the same name we will need an specific selector to append it to the last one.*/
-				if (HTMLstring.match(regexImg)) {
+				// if (HTMLstring.match(regexImg)) {
 
+				// 		changeData = HTMLstring.replace("%data%", info);
+				// 		appendData = $(".image-container:last").append(changeData);
+
+				// }
+
+				// * This condition checks if the HTMLstring has location-text on it, if it does it will pass the info to takeLocationInfo for the markers map
+				// else if (HTMLstring.match(regexLoc)) {
+
+				// 		takeTheLocationInfo(info);
+				// 		changeData = HTMLstring.replace("%data%", info);
+				// 		appendData = $(classOrID).append(changeData);
+
+				// }
+				if(HTMLstring.match(regexBioPic)){
+						console.log("2biopic")
 						changeData = HTMLstring.replace("%data%", info);
-						appendData = $(".image-container:last").append(changeData);
-
+						appendData = $(classOrID).prepend(changeData);
 				}
-
-				/** This condition checks if the HTMLstring has location-text on it, if it does it will pass the info to takeLocationInfo for the markers map */
-				else if (HTMLstring.match(regexLoc)) {
-
-						takeTheLocationInfo(info);
-						changeData = HTMLstring.replace("%data%", info);
-						appendData = $(classOrID).append(changeData);
-
-				}
-
 				else {
 
 						changeData = HTMLstring.replace("%data%", info);
@@ -401,6 +426,9 @@ $(document).ready(function() {
 		function createNewSection(sectionName) {
 
 				var startHTML = "<div class='"+sectionName+"-entry'></div>";
+				console.log(startHTML)
+				var a= $("#"+sectionName);
+				console.log(a)
 				$("#"+sectionName).append(startHTML);
 
 			}
@@ -418,14 +446,14 @@ $(document).ready(function() {
 
 
 		/**Array that contains the value of media contact of the Object bio*/
-		var arrayFooter = [bioHTMLStrings.contacts[0].email, bioHTMLStrings.contacts[0].twitter, bioHTMLStrings.contacts[0].github]
+		//var arrayFooter = [bioHTMLStrings.contacts[0].email, bioHTMLStrings.contacts[0].twitter, bioHTMLStrings.contacts[0].github]
 
 		/**Loop that iterates over the arrayFooter and calls substituteAndInsert function for each value*/
-		for (index in arrayFooter) {
+		//for (index in arrayFooter) {
 
-				substituteAndInsert(arrayFooter[index], "", footerContacts);
+		//		substituteAndInsert(arrayFooter[index], "", footerContacts);
 
-		};
+		//};
 
 		/**As the values that contain arrayFooter are the same used for the contact subsection we need to add a class for the elements
 		in the footer section to diferenciate them and target them for style*/
@@ -510,6 +538,6 @@ $(document).ready(function() {
 		}
 
 
-		iterateArrays(arrayObjectsInfo, arrayObjectsHTML, arrayObjectsStr);
+		//iterateArrays(arrayObjectsInfo, arrayObjectsHTML, arrayObjectsStr);
 
 });
