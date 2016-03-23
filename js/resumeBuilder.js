@@ -1,4 +1,4 @@
-//"use strict"
+"use strict"
 /**
 
  */
@@ -12,7 +12,7 @@ $(document).ready(function() {
 							"name": '<div class="col-md-12 text-uppercase text-center" id="name"><h1 class="header">%data%</h1></div>',
 							"role": '<div class="col-md-12 text-center role">&nbsp %data%</div><hr>',
 							"contacts":{
-									"mobile": '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span class= "textContact">%data%</span></li></a>',
+									"mobile": '<ul><a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span class= "textContact">%data%</span></li></a>',
 							 		"email": '<a href="mailto:vanearochi@gmail.com" ><li class="flex-item fa fa-envelope">&nbsp <span class="textContact">%data%</span></li></a>',
 									"github": '<a href="https://github.com/vanearochi"><li class="flex-item fa fa-github-square">&nbsp <span class="textContact">%data%</span></li></a>',
 							 		"twitter": '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
@@ -22,7 +22,7 @@ $(document).ready(function() {
 							"skills": '<div class="flex-grow  skills textSkills ">%data%</div>',
 							"biopic": '<div class="col-md-12 "><img src="%data%" class="biopic img-responsive img-circle"></div>'
 
-						}
+						};
 
 
  		var bio = {
@@ -56,27 +56,28 @@ $(document).ready(function() {
 											//createNewSection("header");
 												if(val==="contacts"){
 														$.each(bio[val], function(key, value){
-															console.log(key, value)
+															//console.log(key, value);
 															var HTMLstringContacts= HTMLstring[key];
-															console.log(HTMLstringContacts)
-															substituteAndInsert(HTMLstringContacts, value, ".header-entry:last")
-														})
+															//console.log(HTMLstringContacts)
+															substituteAndInsert(HTMLstringContacts, value, ".header-entry:last");
+														});
+														var contactGeneric= '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me %data%</div>';
+														substituteAndInsert(contactGeneric, " ", ".header-entry:first" )
 												}
 												else if(val==="skills"){
-													var contactGeneric= '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me</div> <ul>';
-													//createNewSection("header");
+
 													bio[val].forEach(function(value){
-															substituteAndInsert(HTMLstring, value, ".header-entry:last")
-													})
-													console.log(bio[val][0]);
+															substituteAndInsert(HTMLstring, value, ".header-entry:last");
+													});
+													//console.log(bio[val][0]);
 
 												}
 												else if(val==="biopic"){
-													console.log("pic")
-													substituteAndInsert(bioHTMLStrings[val], bio[val], "#header")
+													//console.log("pic")
+													substituteAndInsert(bioHTMLStrings[val], bio[val], "#header");
 												}
 										else {
-											substituteAndInsert(bioHTMLStrings[val], bio[val], ".header-entry:last")
+											substituteAndInsert(bioHTMLStrings[val], bio[val], ".header-entry:last");
 										}
 
 
@@ -93,7 +94,7 @@ $(document).ready(function() {
 
 		};
 
-		//bio.display();
+		bio.display();
 
 		var educationHTMLStrings = {
 
@@ -167,51 +168,55 @@ $(document).ready(function() {
 
 				display: function(){
 
-					var subsectionKeys = givemeTheKeys(educationHTMLStrings);
-					var keysInSubsectionSchools = givemeTheKeys(educationHTMLStrings[subsectionKeys[0]]);
-					var keysInSubsectionOnline =  givemeTheKeys(educationHTMLStrings[subsectionKeys[1]]);
+						var subsectionKeys = givemeTheKeys(educationHTMLStrings);
+						var keysInSubsectionSchools = givemeTheKeys(educationHTMLStrings[subsectionKeys[0]]);
+						var keysInSubsectionOnline =  givemeTheKeys(educationHTMLStrings[subsectionKeys[1]]);
 
-					education.schools.forEach(function(val){
-							//console.log(val["name"])
-							createNewSection("education")
-							keysInSubsectionSchools.forEach(function(value){
-								var HTMLEduStr = educationHTMLStrings.schools[value]
-								var infoEdu = val[value];
-								//console.log(infoEdu);
-								substituteAndInsert(HTMLEduStr, infoEdu, ".education-entry:last")
-							})
-							// var schoolInfo= education.schools[0]
-							// console.log(schoolInfo);
-							// substituteAndInsert(bioHTMLStrings[val], bio[val], ".header-entry:last")
+						education.schools.forEach(function(val){
+								//console.log(val["name"])
+								createNewSection("education");
+								keysInSubsectionSchools.forEach(function(value){
+									var HTMLEduStr = educationHTMLStrings.schools[value];
+									var infoEdu = val[value];
+									//console.log(infoEdu);
+									substituteAndInsert(HTMLEduStr, infoEdu, ".education-entry:last");
+								});
+								// var schoolInfo= education.schools[0]
+								// console.log(schoolInfo);
+								// substituteAndInsert(bioHTMLStrings[val], bio[val], ".header-entry:last")
 
 
-					})
-					education.onlineCourses.forEach(function(val){
-					 	keysInSubsectionOnline.forEach(function(value){
-					 		var HTMLOnlineStr= educationHTMLStrings.onlineCourses[value]
-					 		console.log(HTMLOnlineStr)
-					 		var infoOnline = val[value];
-					 		console.log(infoOnline)
-					 		substituteAndInsert(HTMLOnlineStr, infoOnline, ".education-entry:last")
-					 	})
-					 });
+						});
+
+						createNewSection("education");
+						var onlineTitleHTML = '<h3 class="onlineClasses">%data%</h3>';
+						substituteAndInsert(onlineTitleHTML, "Online Classes", ".education-entry:last");
+
+								education.onlineCourses.forEach(function(val){
+										 	keysInSubsectionOnline.forEach(function(value){
+										 		var HTMLOnlineStr= educationHTMLStrings.onlineCourses[value];
+										 		//console.log(HTMLOnlineStr)
+										 		var infoOnline = val[value];
+										 		//console.log(infoOnline)
+										 		substituteAndInsert(HTMLOnlineStr, infoOnline, ".education-entry:last");
+								 });
+						 });
 				 }
 
 		}
 
-		education.display();
+		//education.display();
 
 		var workHTMLStrings = {
 
-					"job": [
-						{
+
 							"employer" : '<a href="#" class="subtitle">%data%</a>',
 							"title" : ' <div class="subtitle1">%data%</div>',
 					 		"location" : '<div class="location-text">%data%</div>',
 					 		"dates" : '<div class="date-text">%data%</div>',
 							"description" : '<p class="text-justify"><br>%data%</p>'
-						}
-					]
+
+
 		};
 
 		var work = {
@@ -261,9 +266,49 @@ $(document).ready(function() {
 					],
 
 
+					display: function(){
+
+							var keysInSubsectionjobs  = givemeTheKeys(workHTMLStrings);
+							//console.log(keysInSubsectionjobs )
+							//var keysInSubsectionjobs = givemeTheKeys(educationHTMLStrings[subsectionKeys[0]]);
+							//var keysInSubsectionOnline =  givemeTheKeys(educationHTMLStrings[subsectionKeys[1]]);
+
+							work.jobs.forEach(function(val){
+							//console.log(val)
+									createNewSection("work")
+									keysInSubsectionjobs.forEach(function(value){
+										//console.log(val[value])
+										var HTMLWorkStr = workHTMLStrings[value]
+										//console.log(HTMLWorkStr)
+										//educationHTMLStrings.schools[value]
+										var infoWork = val[value];
+										//console.log(infoWork);
+										substituteAndInsert(HTMLWorkStr, infoWork, ".work-entry:last")
+									 })
+									// var schoolInfo= education.schools[0]
+									// console.log(schoolInfo);
+									// substituteAndInsert(bioHTMLStrings[val], bio[val], ".header-entry:last")
+
+
+							})
+
+					 }
+
 
 		};
 
+		work.display();
+
+		var projectsHTMLStrings = {
+
+
+							"title": '<a href="#" class="subtitle">%data%</a>',
+				 			"dates": '<div class="date-text">%data%</div>',
+							"description": '<p class="text-justify"><br>%data%</p>',
+							//"imageContainer": '',
+							"images": '<div class="col-md-4 project-images"><img src="%data%" class="img-responsive"></div>'
+
+		};
 
 
 		var project = {
@@ -285,7 +330,7 @@ $(document).ready(function() {
 							"-<b>T</b>his website is responsible, display images, descriptions and links to each of my portfolio projects and has some interactivity given by Javascript and Jquery.",
 							"images": [
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.32.13+PM.png",
-									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.32.13+PM.png",
+									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.32.13+PM.png"
 							]
 						},
 						{
@@ -298,23 +343,56 @@ $(document).ready(function() {
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.36.03+PM.png"
 							]
 						}
-					]
+					],
+					display: function(){
+
+							var keysInSubsectionProjects  = givemeTheKeys(projectsHTMLStrings);
+							console.log(keysInSubsectionProjects);
+							//var keysInSubsectionjobs = givemeTheKeys(educationHTMLStrings[subsectionKeys[0]]);
+							//var keysInSubsectionOnline =  givemeTheKeys(educationHTMLStrings[subsectionKeys[1]]);
+
+							project.projects.forEach(function(val){
+									//console.log(val)
+							 		createNewSection("project")
+							 		keysInSubsectionProjects.forEach(function(value){
+							 			var infoProjects= val[value];
+							 			//console.log(infoProjects)
+							 			var HTMLProjectStr = projectsHTMLStrings[value]
+							 				//console.log(HTMLProjectStr)
+							 			if(Array.isArray(val[value])){
+							 				var imgContainerHTML = '<div class="row image-container">%data%</div>'
+							 				substituteAndInsert(imgContainerHTML, " ", ".project-entry:last")
+							 					val[value].forEach(function(img){
+							 					//console.log(img)
+							 							substituteAndInsert(HTMLProjectStr, img, ".image-container:last")
+							 					})
+							 			}
+							 			else{
+							 				console.log("bla")
+							 				substituteAndInsert(HTMLProjectStr, infoProjects, ".project-entry:last")
+							 			}
+							 			//console.log(val[value])
+							// 			var HTMLWorkStr = workHTMLStrings[value]
+							// 			//console.log(HTMLWorkStr)
+							// 			//educationHTMLStrings.schools[value]
+							// 			var infoWork = val[value];
+							// 			console.log(infoWork);
+							// 			substituteAndInsert(HTMLWorkStr, infoWork, ".work-entry:last")
+							})
+							// 		// var schoolInfo= education.schools[0]
+							// 		// console.log(schoolInfo);
+							// 		// substituteAndInsert(bioHTMLStrings[val], bio[val], ".header-entry:last")
+
+
+									 })
+
+					 }
+
+
 
 		};
+project.display();
 
-		var projectsHTMLStrings = {
-
-					"projects": [
-						{
-							"title": '<a href="#" class="subtitle">%data%</a>',
-				 			"dates": '<div class="date-text">%data%</div>',
-							"description": '<p class="text-justify"><br>%data%</p>',
-							"imageContainer": '<div class="row image-container">',
-							"images": '<div class="col-md-4 project-images"><img src="%data%" class="img-responsive"></div></div>'
-						}
-					]
-
-		};
 
 		var googleMap = '<div id="map"></div>';
 
@@ -510,72 +588,72 @@ $(document).ready(function() {
 
 		/**As I wanted to learn about google maps I study a bit the documentation of it and apply it in a different way*/
 
-		var map;
+		// var map;
 
-		/** @function createNewMap
-		 * Function that creates a new google map
-		 * @param {object} json Object with the information of a certain location
-		 */
-		var createNewMap = function(json) {
+		// /** @function createNewMap
+		//  * Function that creates a new google map
+		//  * @param {object} json Object with the information of a certain location
+		//  */
+		// var createNewMap = function(json) {
 
-				var location = json.results[0].geometry.location;
-			 	map = new google.maps.Map(mapDiv, {
+		// 		var location = json.results[0].geometry.location;
+		// 	 	map = new google.maps.Map(mapDiv, {
 
-		      			center: location,
-		      			zoom: 3
+		//       			center: location,
+		//       			zoom: 3
 
-		    	});
+		//     	});
 
-				addMarker(location, map);
+		// 		addMarker(location, map);
 
-		};
+		// };
 
-		/** @function addMArker
-		 * Creates markers in the map with the locations available in the resume
-		 * @param {object} location object that contains the latitude and longitude of a certain location
-		 * @param {object} map      object that contains the information of a google map
-		*/
-		function addMarker(location, map) {
+		// /** @function addMArker
+		//  * Creates markers in the map with the locations available in the resume
+		//  * @param {object} location object that contains the latitude and longitude of a certain location
+		//  * @param {object} map      object that contains the information of a google map
+		// */
+		// function addMarker(location, map) {
 
-		  		var marker = new google.maps.Marker({
+		//   		var marker = new google.maps.Marker({
 
-		    			position: location,
-		    			map: map
+		//     			position: location,
+		//     			map: map
 
-		  		});
+		//   		});
 
-		}
+		// }
 
-		$.ajax({
-		 		url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:SanFrancisco&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
-		 		success: createNewMap
-		});
+		// $.ajax({
+		//  		url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:SanFrancisco&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
+		//  		success: createNewMap
+		// });
 
-		/** @function takeTheLocationInfo
-		  * Request an ajax to get a json with the information of a location given as a parameter
-		  * @param {string} location String
-		*/
-		function takeTheLocationInfo(location){
+		// /** @function takeTheLocationInfo
+		//   * Request an ajax to get a json with the information of a location given as a parameter
+		//   * @param {string} location String
+		// */
+		// function takeTheLocationInfo(location){
 
-				$.ajax({
+		// 		$.ajax({
 
-						url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:"+location+"&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
-						success: parseMarker
+		// 				url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:"+location+"&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
+		// 				success: parseMarker
 
-				});
+		// 		});
 
-		}
+		// }
 
-		/** @function parseMarker
-		 * Get the coordinates of the location from the json passed as argument
-		 * @param {object} json object with the information of a certain location
-		*/
-		function parseMarker(json) {
+		// /** @function parseMarker
+		//  * Get the coordinates of the location from the json passed as argument
+		//  * @param {object} json object with the information of a certain location
+		// */
+		// function parseMarker(json) {
 
-				var locationCord=json.results[0].geometry.location;
-				addMarker(locationCord, map);
+		// 		var locationCord=json.results[0].geometry.location;
+		// 		addMarker(locationCord, map);
 
-		}
+		// }
 
 
 		//iterateArrays(arrayObjectsInfo, arrayObjectsHTML, arrayObjectsStr);
