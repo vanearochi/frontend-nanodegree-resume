@@ -6,8 +6,8 @@
 
 
 
-							"name": '<div class="col-md-12 text-uppercase text-center headerTitle" id="name"><h1 >%data%</h1></div>',
-							"role": '<div class="col-md-12 text-center role headerRole">&nbsp %data%</div><hr>',
+							"name": '<div class=" text-uppercase text-center headerTitle" id="name"><h1 >%data%</h1></div>',
+							"role": '<div class=" text-center role headerRole">&nbsp %data%</div><hr>',
 							"contacts":{
 									"mobile": '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span class= "textContact">%data%</span></li></a>',
 							 		"email": '<a href="mailto:vanearochi@gmail.com" ><li class="flex-item fa fa-envelope">&nbsp <span class="textContact">%data%</span></li></a>',
@@ -15,7 +15,7 @@
 							 		"twitter": '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
 									"location": '<a href=""><li class="flex-item fa fa-map-marker">&nbsp <span class="textContact"> %data%</span></li></a>',
 							},
-							"welcomeMessage": '<span class="welcome-message">%data%</span>',
+							"welcomeMessage": '<span class="welcome-message text-capitalize">%data%</span>',
 							"skills": '<div class="flex-grow  skills textSkills ">%data%</div>',
 							"biopic": '<div class="col-md-12 "><img src="%data%" class="biopic img-responsive img-circle"></div>'
 
@@ -69,7 +69,7 @@
 
 													//**Creating a new subsection for skills and appending the title of it*/
 													createNewSection("header");
-													var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance: %data%</h3><ul id="skills" class="flex-box"></ul>';
+													var HTMLskillsStart = '<h3 id="skills-h3" class="bg-primary lead text-uppercase">Skills %data%</h3><ul id="skills" class="flex-box"></ul>';
 													substituteAndInsert(HTMLskillsStart, " ", ".header-entry:last");
 
 													/**Iterating over bio.skills array and passing the values as arguments*/
