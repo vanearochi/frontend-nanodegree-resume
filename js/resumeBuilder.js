@@ -1,76 +1,123 @@
-/**
-This is empty on purpose! Your code to build the resume will go here.
- */
+'use strict';
 
-$(document).ready(function() {
 /** All data and HTML strings are inside objects so I could use functions and don't repeat the code thinking on what I learned on the javascript basic course: don't repeat yourself*/
-
- 		var bio = {
-
-		 		"header":[
-						{
-							"bioPic": "https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/vaneUdacityp2.jpg",
-							"name": "Vanessa Arochi",
-							"role": "Web Developer",
-						},
-				],
-				"message":[
-						{
-							"welcomeMsg": "Hello my name is Vanessa Arochi"
-						}
-				],
-				"skills":[
-						{
-							"skillsTitle": "Skills",
-							"skills": [
-				 					"Project Managing", "Programming", "Sales", "Product Developing"
-				 			]
-						}
-				],
-				"contacts" : [
-						{
-							"contactGeneric": '',
-							"mobile": "(650) 452 57 67",
-							"email": "vanearochi@gmail.com",
-							"github": "vanearochi",
-							"twitter": "vanearochi",
-							"location": "San Francisco",
-						}
-				]
-
-		};
 
 		var bioHTMLStrings = {
 
-				"personal": [
-						{
-							"bioPic": '<div class="col-md-12 "><img src="%data%" class="biopic img-responsive img-circle"></div>',
-							"name": '<div class="col-md-12 text-uppercase text-center" id="name"><h1 class="header">%data%</h1></div>',
-							"role": '<div class="col-md-12 text-center role">&nbsp %data%</div><hr>',
-						}
-				],
-				"message":[
-						{
-							"welcomeMsg": '<span class="welcome-message">%data%</span>',
-						}
-				],
-				"skills":[
-						{
-							"skillsTitle": '<div class="skills  text-uppercase text-center bg-primary">%data%</div>',
-							"skills": '<div class="flex-grow  skills textSkills ">%data%</div>'
-						}
-				],
-				"contacts" : [
-						{
-							"contactGeneric": '<div id="contacts" class=" text-center text-uppercase bg-primary">Contact me</div> <ul>',
-							"mobile": '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span class= "textContact">%data%</span></li></a>',
-					 		"email": '<a href="mailto:vanearochi@gmail.com" ><li class="flex-item fa fa-envelope">&nbsp <span class="textContact">%data%</span></li></a>',
-							"github": '<a href="https://github.com/vanearochi"><li class="flex-item fa fa-github-square">&nbsp <span class="textContact">%data%</span></li></a>',
-					 		"twitter": '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
-							"location": '<a href=""><li class="flex-item fa fa-map-marker">&nbsp <span class="textContact"> %data%</span></li></a></ul>'
 
-				 		}
-				]
+
+							"name": '<div class=" text-uppercase text-center headerTitle" id="name"><h1 >%data%</h1></div>',
+							"role": '<div class=" text-center role headerRole">&nbsp %data%</div><hr>',
+							"contacts":{
+									"mobile": '<a href="tel:555-555-5555"><li class="flex-item fa fa-phone-square">&nbsp <span class= "textContact">%data%</span></li></a>',
+							 		"email": '<a href="mailto:vanearochi@gmail.com" ><li class="flex-item fa fa-envelope">&nbsp <span class="textContact">%data%</span></li></a>',
+									"github": '<a href="https://github.com/vanearochi"><li class="flex-item fa fa-github-square">&nbsp <span class="textContact">%data%</span></li></a>',
+							 		"twitter": '<a href="http://twitter.com/VaneArochi" ><li class="flex-item fa fa-twitter-square">&nbsp <span class="textContact">%data%</span></li></a>',
+									"location": '<a href=""><li class="flex-item fa fa-map-marker">&nbsp <span class="textContact"> %data%</span></li></a>',
+							},
+							"welcomeMessage": '<span class="welcome-message text-capitalize">%data%</span>',
+							"skills": '<div class="flex-grow  skills textSkills ">%data%</div>',
+							"biopic": '<div class="col-md-12 "><img src="%data%" class="biopic img-responsive img-circle"></div>'
+
+						};
+
+
+ 		var bio = {
+
+		 					"name": "Vanessa Arochi",
+							"role": "Web Developer",
+							"contacts":{
+									"mobile": "(650) 452 57 67",
+									"email": "vanearochi@gmail.com",
+									"github": "vanearochi",
+									"twitter": "vanearochi",
+									"location": "San Francisco",
+							},
+							"welcomeMessage": "Hello my name is Vanessa Arochi",
+							"skills": [
+				 					"Project Managing", "Programming", "Sales", "Product Developing"
+				 			],
+						    "biopic": "https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/vaneUdacityp2.jpg",
+
+						    /**@function display
+							 * Iterates over objects to take strings and calls functions with those strings as parameters
+							   to substitute the %data% with information and append it to a Section
+						    **/
+							display: function(){
+
+									/**Getting the Object keys*/
+									var keysHTMLBio = givemeTheKeys(bioHTMLStrings);
+
+									/**Taking each key to be able to acess the object value*/
+									keysHTMLBio.forEach(function(val){
+
+											var HTMLstring = bioHTMLStrings[val];
+											var infoBio = bio[val];
+
+											if(val==="contacts"){
+
+													/**Iterating over bio.contacts object*/
+													$.each(infoBio, function(key, value){
+
+															var HTMLstringContacts= HTMLstring[key];
+
+															substituteAndInsert(HTMLstringContacts, value, "#topContacts");
+													});
+
+											}
+											else if(val==="skills"){
+
+													//**Creating a new subsection for skills and appending the title of it*/
+													createNewSection("header");
+													var HTMLskillsStart = '<h3 id="skills-h3" class="bg-primary lead text-uppercase">Skills %data%</h3><ul id="skills" class="flex-box"></ul>';
+													substituteAndInsert(HTMLskillsStart, " ", ".header-entry:last");
+
+													/**Iterating over bio.skills array and passing the values as arguments*/
+													infoBio.forEach(function(value){
+															substituteAndInsert(HTMLstring, value, ".header-entry:last");
+													});
+											}
+											else if(val==="biopic"){
+
+													substituteAndInsert(HTMLstring, infoBio, "#header");
+
+											}
+											else if (val==="name") {
+
+													substituteAndInsert(HTMLstring, infoBio, "#header");
+
+											}
+											else{
+
+													substituteAndInsert(HTMLstring, infoBio, ".headerTitle");
+
+											}
+
+									});
+						}
+
+		};
+
+		bio.display();
+
+		var educationHTMLStrings = {
+
+				"schools":
+						{
+				   			"name": '<a href="#" class="subtitle">%data%</a>',
+				   			"location": '<div class="location-text">%data%</div>',
+				   			"degree": '<div class=subtitle1>%data%</div>',
+				    		"majors": '<em>Major: %data%</em>',
+				    		"dates": '<div class="date-text">%data%</div>',
+				    		"url" : '<a href="#" class="schoolLink">%data%</a>'
+						},
+				"onlineCourses":
+						{
+							"title":'<a href="#" class="subtitle">%data%</a>',
+							"school": '<div class="subtitle1">%data%</div>',
+							"dates": '<div class="date-text">%data%</div>',
+							"url": '<a href="#" class="schoolLink">%data%</a>'
+						}
 
 		};
 
@@ -79,72 +126,97 @@ $(document).ready(function() {
 				"schools" : [
 						{
 							"name": "Instituto Tecnologico de Morelia",
+							"location": "Morelia",
 							"degree": "Bioquemical Engineenering",
+							"majors": ["BA"],
 							"dates": "2001-2006",
-							"city": "Morelia",
-							"major": "BA"
+							"url": "http://www.itmorelia.edu.mx/"
 						}
 				],
 				"onlineCourses": [
 						{
-							"h3": "Online Classes",
 							"title": "Intro to HTML and CSS",
 							"school": "Udacity",
 							"dates": "2016",
 							"url": "https://www.udacity.com/course/ud304"
 						},
 						{
-							"h3": "",
 							"title": "Javascript Basics",
 							"school": "Udacity",
-							"dates": 2016,
+							"dates": "2016",
 							"url": "https://www.udacity.com/course/ud804"
 						},
 						{
-							"h3": "",
 							"title": "Object-Oriented Javascript",
 							"school": "Udacity",
-							"dates": 2016,
+							"dates": "2016",
 							"url": "https://www.udacity.com/course/ud015"
 						},
 						{
-							"h3": "",
 							"title": "Responsive Images",
 							"school": "Udacity",
-							"dates": 2016,
+							"dates": "2016",
 							"url": "https://www.udacity.com/course/ud882"
 						},
 						{
-							"h3": "",
 							"title": "Responsive Web Design Fundamentals",
 							"school": "Udacity",
-							"dates": 2016,
+							"dates": "2016",
 							"url": "https://www.udacity.com/course/ud893"
 						}
-				]
+				],
+
+				display: function(){
+						/**Taking the subsection Keys of education and the keys inside of each*/
+						var subsectionKeys = givemeTheKeys(educationHTMLStrings);
+						var keysInSubsectionSchools = givemeTheKeys(educationHTMLStrings[subsectionKeys[0]]);
+						var keysInSubsectionOnline =  givemeTheKeys(educationHTMLStrings[subsectionKeys[1]]);
+
+						/**Iterating Over education.schools*/
+						education.schools.forEach(function(val){
+								/**Creating a new subsection for schools*/
+								createNewSection("education");
+								/**Taking the values in subsection schools and passing them as arguments*/
+								keysInSubsectionSchools.forEach(function(value){
+
+										var HTMLEduStr = educationHTMLStrings.schools[value];
+										var infoEdu = val[value];
+										substituteAndInsert(HTMLEduStr, infoEdu, ".education-entry:last");
+
+								});
+
+						});
+						/**Creating a new subsection for Online Classes and appending the title to it by calling a function*/
+						createNewSection("education");
+						var onlineTitleHTML = '<h3 class="onlineClasses">%data%</h3>';
+						substituteAndInsert(onlineTitleHTML, "Online Classes", ".education-entry:last");
+								/**Iterating over education.onlineClasses array*/
+								education.onlineCourses.forEach(function(val){
+
+											/**Iterating over each object property to take the value*/
+										 	keysInSubsectionOnline.forEach(function(value){
+
+										 		var HTMLOnlineStr= educationHTMLStrings.onlineCourses[value];
+										 		var infoOnline = val[value];
+										 		substituteAndInsert(HTMLOnlineStr, infoOnline, ".education-entry:last");
+								 });
+						 });
+				 }
 
 		};
 
-		var educationHTMLStrings = {
+		education.display();
 
-				"schools":[
-						{
-				   			"name": '<a href="#" class="subtitle">%data%</a>',
-				   			"degree": '<div class=subtitle1>%data%</div>',
-				    		"dates": '<div class="date-text">%data%</div>',
-							"city": '<div class="location-text">%data%</div>',
-							"major": '<em>Major: %data%</em>'
-						}
-				],
-				"onlineCourses": [
-						{
-							"h3":'<h3 class="onlineClasses">%data%</h3>',
-							"title":'<a href="#" class="subtitle">%data%</a>',
-							"school": '<div class="subtitle1">%data%</div>',
-							"dates": '<div class="date-text">%data%</div>',
-							"url": '<a href="#" class="schoolLink">%data%</a>'
-						}
-				]
+		var workHTMLStrings = {
+
+
+							"employer" : '<a href="#" class="subtitle">%data%</a>',
+							"title" : ' <div class="subtitle1">%data%</div>',
+					 		"location" : '<div class="location-text">%data%</div>',
+					 		"dates" : '<div class="date-text">%data%</div>',
+							"description" : '<p class="text-justify"><br>%data%</p>'
+
+
 		};
 
 		var work = {
@@ -191,23 +263,48 @@ $(document).ready(function() {
 							"<b>-P</b>rovided technical assistance to operation in both cost improvement projects and routine troubleshooting<br>"
 						},
 
-					]
+					],
+
+
+					display: function(){
+
+							//**Getting the keys of the subsections in work*/
+							var keysInSubsectionjobs  = givemeTheKeys(workHTMLStrings);
+
+							/**Iterating over the jobs subsection*/
+							work.jobs.forEach(function(val){
+									/**Creating a new subsection for each job*/
+									createNewSection("work");
+									/**Iterating over the array of keys to take the value of each job*/
+									keysInSubsectionjobs.forEach(function(value){
+
+										var HTMLWorkStr = workHTMLStrings[value];
+										var infoWork = val[value];
+										substituteAndInsert(HTMLWorkStr, infoWork, ".work-entry:last");
+
+									 });
+							});
+
+					 }
+
+
 		};
 
-		var workHTMLStrings = {
+		work.display();
 
-					"job": [
-						{
-							"employer" : '<a href="#" class="subtitle">%data%</a>',
-							"title" : ' <div class="subtitle1">%data%</div>',
-					 		"dates" : '<div class="date-text">%data%</div>',
-							"location" : '<div class="location-text">%data%</div>',
-							"description" : '<p class="text-justify"><br>%data%</p>'
-						}
-					]
+		var projectsHTMLStrings = {
+
+
+							"title": '<a href="#" class="subtitle">%data%</a>',
+				 			"dates": '<div class="date-text">%data%</div>',
+							"description": '<p class="text-justify"><br>%data%</p>',
+							//"imageContainer": '',
+							"images": '<div class="col-md-4 project-images"><img src="%data%" class="img-responsive"></div>'
+
 		};
 
-		var project = {
+
+		var projects = {
 
 					"projects": [
 						{
@@ -215,7 +312,6 @@ $(document).ready(function() {
 							"dates": "2016",
 							"description": "<b>-P</b>roject 0 for Udacity Nanodegree.<br>"+
 							"<b>-W</b>ebsite in which I worked with basic structure of HTML and CSS",
-							"imageContainer":"",
 							"images": [
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Screen+Shot+2016-01-15+at+3.png"
 							]
@@ -225,133 +321,70 @@ $(document).ready(function() {
 							"dates": "2016",
 							"description": "<b>-P</b>roject 1 for Udacity Nanodegree. Portfolio site in which I replicated the design given in HTML, CSS and bootstrap.<br>"+
 							"-<b>T</b>his website is responsible, display images, descriptions and links to each of my portfolio projects and has some interactivity given by Javascript and Jquery.",
-							"imageContainer":"",
 							"images": [
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.32.13+PM.png",
-									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.32.13+PM.png",
+									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.32.13+PM.png"
 							]
 						},
 						{
 							"title": "Online Resume",
 							"dates": "2016",
 							"description": "<b>-P</b>roject 2 for Udacity Nanodegree. ",
-							"imageContainer":"",
 							"images": [
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.36.03+PM.png",
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.36.03+PM.png",
 									"https://s3-us-west-2.amazonaws.com/vaneprojects/images/Udacity-p2/Screen+Shot+2016-03-17+at+4.36.03+PM.png"
 							]
 						}
-					]
+					],
+					display: function(){
+
+							//**Getting keys of the subsections in project*/
+							var keysInSubsectionProjects  = givemeTheKeys(projectsHTMLStrings);
+							console.log(keysInSubsectionProjects);
+
+							/**Iterating over the projects subsection*/
+							projects.projects.forEach(function(val){
+
+									/**Creating a new subsection for each job*/
+							 		createNewSection("projects");
+							 		/**Iterating over the array of keys to take the value of each project*/
+							 		keysInSubsectionProjects.forEach(function(value){
+
+							 			var infoProjects= val[value];
+							 			var HTMLProjectStr = projectsHTMLStrings[value];
+
+							 			/**Condition to get the arrays inside the object*/
+							 			if(Array.isArray(val[value])){
+							 				/**Creating a new container for the images display*/
+							 				var imgContainerHTML = '<div class="row image-container">%data%</div>';
+							 				substituteAndInsert(imgContainerHTML, " ", ".projects-entry:last");
+
+							 				/**Iterating over the array images*/
+							 				val[value].forEach(function(img){
+
+							 							substituteAndInsert(HTMLProjectStr, img, ".image-container:last");
+							 				});
+
+							 			}
+
+							 			else{
+
+							 				substituteAndInsert(HTMLProjectStr, infoProjects, ".projects-entry:last");
+
+							 			}
+
+									});
+							});
+
+					 }
+
+
 
 		};
-
-		var projectsHTMLStrings = {
-
-					"projects": [
-						{
-							"title": '<a href="#" class="subtitle">%data%</a>',
-				 			"dates": '<div class="date-text">%data%</div>',
-							"description": '<p class="text-justify"><br>%data%</p>',
-							"imageContainer": '<div class="row image-container">',
-							"images": '<div class="col-md-4 project-images"><img src="%data%" class="img-responsive"></div></div>'
-						}
-					]
-
-		};
-
-		var googleMap = '<div id="map"></div>';
-
-		/**Array with Objects that contain the data that fills the HTML strings*/
-		var arrayObjectsInfo = [bio, education, work, project];
-
-		/**Array with name of the id in which the HTMLstrings will be appended*/
-		var arrayObjectsStr = ["header", "education", "work", "project"];
-
-		/**Array with HTML strings templates that will fill the resume page*/
-		var arrayObjectsHTML = [bioHTMLStrings, educationHTMLStrings, workHTMLStrings, projectsHTMLStrings];
+projects.display();
 
 
-		/** @function iterateArrays
-		 * Iterates over arrays and calls getTheInfoForTheSection function
-		 * @param {array} arrInfo - Array that contains the Object that have the info to fill the page (arrayObjectsInfo)
-		 * @param {array} arrHTML -	Array that contains the Object that have the HTML strings templates (arrayObjectsHTML)
-		 * @param {array} arrStr  - Array that contains the string id of each parent sections
-		 */
-		function iterateArrays(arrInfo, arrHTML, arrStr) {
-
-				var howManyObjects = arrInfo.length;
-
-				for (var i = 0; i<howManyObjects; i++) {
-
-						getTheInfoForTheSection(arrayObjectsInfo[i], arrayObjectsHTML[i], arrStr[i]);
-
-				};
-
-		}
-
-
-		/** @function getTheInfoForTheSection
-		 * Iterate over Objects getting data and HTML strings of them that will be appended to their corresponding parent sections.
-		 * Creates the selector variable.
-		 * Calls to createNewSection & getTheInfoForTheSection
-		 * @param {object} objectInfo - Object that contains the info that will fill the resume
-		 							    (bio, education, work or project)
-		 * @param {object} objectHTML - Object that contains the HTML strings that will give the HTML structure of the resume
-		                                (bioHTMLStrings, educationHTMLStrings, workHTMLStrings or projectsHTMLStrings)
-		 * @param {string} idSectionName - id of each parent section of the page
-		 								   (header, work, project or education)
-		 */
-		function getTheInfoForTheSection(objectInfo, objectHTML, idSectionName) {
-
-				var subsectionInfoKeys = givemeTheKeys(objectInfo);
-				var subsectionHTMLKeys = givemeTheKeys(objectHTML);
-				var selector = "." + idSectionName + "-entry:last";
-
-				for (var h=0; h<subsectionInfoKeys.length; h++) {
-
-						/**
-						 * This array will give us the number of subsections inside each parent section
-						 * @var {array} indexSubsectionArr
-						*/
-						var indexSubsectionArr = givemeTheKeys(objectInfo[subsectionInfoKeys[h]]);
-						var dataInSubsectionInfo = givemeTheKeys(objectInfo[subsectionInfoKeys[h]][0]);
-
-						/**
-						 *This loop will create a new subsection on the corresponding parent section depending on the number of indexes on the indexSubsectionArr
-						*/
-						for (var i = 0; i<indexSubsectionArr.length; i++) {
-
-								createNewSection(idSectionName);
-
-						/**In this loop we will get the HTML string and the data that corresponds to it*/
-								for (var j = 0; j<dataInSubsectionInfo.length; j++) {
-
-										var infoStr = objectInfo[subsectionInfoKeys[h]][i][dataInSubsectionInfo[j]];
-										var HTMLstr = objectHTML[subsectionHTMLKeys[h]][0][dataInSubsectionInfo[j]];
-
-										/**
-										 * If infoStr is an Array Then we iterate over it and get each element on it and place it in its corrssponding
-										   HTML string(HTMLstr)
-										*/
-										if (Array.isArray(infoStr)) {
-												for (info in infoStr) {
-
-														substituteAndInsert(HTMLstr, infoStr[info], selector);
-
-												}
-										}
-
-										else {
-
-												substituteAndInsert(HTMLstr, infoStr, selector);
-
-										}
-								}
-						}
-				};
-
-		}
 
 		/** @function substituteAndInsert
 		 * Replace a piece of the HTML string with a new string passed as an argument and will append it to his corresponding  parent section
@@ -361,25 +394,26 @@ $(document).ready(function() {
 		*/
 		function substituteAndInsert(HTMLstring, info, classOrID) {
 
-				var regexImg = /project-images/;
+				var regexTitle = /headerTitle/;
 				var regexLoc = /location-text/;
+				var regexbiopic= /biopic/;
 				var changeData;
 				var appendData;
 
-				/**As each image have the same name we will need an specific selector to append it to the last one.*/
-				if (HTMLstring.match(regexImg)) {
+				/**Condition to check for 2 elements that need to be prepend instead of appended*/
+				if (HTMLstring.match(regexTitle) || HTMLstring.match(regexbiopic)) {
 
-						changeData = HTMLstring.replace("%data%", info);
-						appendData = $(".image-container:last").append(changeData);
+				 		changeData = HTMLstring.replace("%data%", info);
+				 		appendData = $(classOrID).prepend(changeData);
 
 				}
 
-				/** This condition checks if the HTMLstring has location-text on it, if it does it will pass the info to takeLocationInfo for the markers map */
+				// * This condition checks if the HTMLstring has location-text on it, if it does it will pass the info to takeLocationInfo for the markers map
 				else if (HTMLstring.match(regexLoc)) {
 
-						takeTheLocationInfo(info);
-						changeData = HTMLstring.replace("%data%", info);
-						appendData = $(classOrID).append(changeData);
+				 		takeTheLocationInfo(info);
+				 		changeData = HTMLstring.replace("%data%", info);
+				 		appendData = $(classOrID).append(changeData);
 
 				}
 
@@ -390,12 +424,10 @@ $(document).ready(function() {
 
 				}
 
-
-
 		}
 
 		/** @function createNewSection
-		 * Creates a new entry for a parent section (header, work, project or education)
+		 * Creates a new entry for a parent section
 		 * @param {string} sectionName the name of the parent section in which the new entry is going to be appended
 		*/
 		function createNewSection(sectionName) {
@@ -403,7 +435,7 @@ $(document).ready(function() {
 				var startHTML = "<div class='"+sectionName+"-entry'></div>";
 				$("#"+sectionName).append(startHTML);
 
-			}
+		}
 
 		/** @function givemeTheKeys
 		 * Return an array of an Object keys
@@ -414,102 +446,94 @@ $(document).ready(function() {
 
 				var keys = Object.keys(object);
 				return keys;
+
 		}
 
 
 		/**Array that contains the value of media contact of the Object bio*/
-		var arrayFooter = [bioHTMLStrings.contacts[0].email, bioHTMLStrings.contacts[0].twitter, bioHTMLStrings.contacts[0].github]
+		var arrayFooter = [bioHTMLStrings.contacts.email, bioHTMLStrings.contacts.twitter, bioHTMLStrings.contacts.github];
 
 		/**Loop that iterates over the arrayFooter and calls substituteAndInsert function for each value*/
-		for (index in arrayFooter) {
+		//for (index in arrayFooter)
+		arrayFooter.forEach(function(value){
 
-				substituteAndInsert(arrayFooter[index], "", footerContacts);
+			substituteAndInsert(value, "", "#footerContacts");
 
-		};
+		});
 
 		/**As the values that contain arrayFooter are the same used for the contact subsection we need to add a class for the elements
 		in the footer section to diferenciate them and target them for style*/
 		var footerElement = $("#footerContacts li.fa");
 		footerElement.addClass("footerIcons");
 
-		// The code below hide the h3 tags that are empty on the education subsection:OnlineClasses*/
-		$(".onlineClasses").hide();
-		$(".onlineClasses:first").show();
-
-
 
 		/**Map section*/
 
 		/**As I wanted to learn about google maps I study a bit the documentation of it and apply it in a different way*/
 
-		var map;
+		 var map;
 
-		/** @function createNewMap
-		 * Function that creates a new google map
-		 * @param {object} json Object with the information of a certain location
-		 */
-		var createNewMap = function(json) {
+			 /** @function createNewMap
+			  * Function that creates a new google map
+			  * @param {object} json Object with the information of a certain location
+			  */
+			 var createNewMap = function(json) {
 
-				var location = json.results[0].geometry.location;
-			 	map = new google.maps.Map(mapDiv, {
+			 		var location = json.results[0].geometry.location;
+			 	 	map = new google.maps.Map(mapDiv, {
+	     					center: location,
+			       			zoom: 3
+				   	});
 
-		      			center: location,
-		      			zoom: 3
+		 		addMarker(location, map);
 
-		    	});
+			 };
 
-				addMarker(location, map);
-
-		}
-
-		/** @function addMArker
-		 * Creates markers in the map with the locations available in the resume
-		 * @param {object} location object that contains the latitude and longitude of a certain location
-		 * @param {object} map      object that contains the information of a google map
-		*/
-		function addMarker(location, map) {
+			/** @function addMArker
+			 * Creates markers in the map with the locations available in the resume
+			 * @param {object} location object that contains the latitude and longitude of a certain location
+		     * @param {object} map      object that contains the information of a google map
+		     */
+		    function addMarker(location, map) {
 
 		  		var marker = new google.maps.Marker({
 
-		    			position: location,
-		    			map: map
+		     			position: location,
+		     			map: map
 
-		  		});
+		   		});
 
-		}
+			 }
 
-		$.ajax({
-		 		url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:SanFrancisco&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
-		 		success: createNewMap
-		});
+			$.ajax({
+		  		url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:SanFrancisco&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
+		  		success: createNewMap
+			 });
 
-		/** @function takeTheLocationInfo
-		  * Request an ajax to get a json with the information of a location given as a parameter
-		  * @param {string} location String
-		*/
-		function takeTheLocationInfo(location){
+		   /** @function takeTheLocationInfo
+		     * Request an ajax to get a json with the information of a location given as a parameter
+		     * @param {string} location String
+		   */
+		   function takeTheLocationInfo(location){
 
-				$.ajax({
+		 		$.ajax({
 
-						url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:"+location+"&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
-						success: parseMarker
+		 				url: "https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:"+location+"&key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y",
+		 				success: parseMarker
 
-				});
+		 		});
 
-		}
+		    }
 
-		/** @function parseMarker
-		 * Get the coordinates of the location from the json passed as argument
-		 * @param {object} json object with the information of a certain location
-		*/
-		function parseMarker(json) {
+		  /** @function parseMarker
+		   * Get the coordinates of the location from the json passed as argument
+		   * @param {object} json object with the information of a certain location
+		   */
+		   function parseMarker(json) {
 
-				var locationCord=json.results[0].geometry.location;
-				addMarker(locationCord, map);
+		  		var locationCord=json.results[0].geometry.location;
+		 		addMarker(locationCord, map);
 
-		}
+		 }
 
 
-		iterateArrays(arrayObjectsInfo, arrayObjectsHTML, arrayObjectsStr);
-
-});

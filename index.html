@@ -51,7 +51,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   -->
 
      <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDTeOjNaYrSL42NWlEtjY7UsKnf-bazI8Y&libraries=places"
-         async defer></script>
+        ></script>
 
       <meta name="viewport" content="width=device-width">
 </head>
@@ -66,26 +66,28 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     display by looking at the id or at what's written between the <h2> tags.
     -->
     <div class="row">
-            <header id="header" class="center-content clear-fix col-sm-4 ">
+            <header id="header" class=" clear-fix col-sm-4 ">
 
+              <div class="contact-title">
+               <h3 class="text-uppercase lead contactTitle bg-primary">Contact me</h3> <ul id="topContacts"></ul></div>
             </header>
             <main class="col-sm-8">
                 <div style="clear: both;"></div> <!--Revisa funcionalidad esta linea al final-->
-                <section id="work" class="">
+                <section id="work">
                     <div class=" fa fa-briefcase bg-primary style style text-uppercase">
                         <span class="blue-title">
                           Work Experience
                         </span>
                     </div>
                 </section>
-                <section id="project" class="">
+                <section id="project">
                     <div class="fa fa-folder  bg-primary style text-uppercase">
                         <span class="blue-title ">
                           Projects
                         </span>
                     </div>
               </section>
-              <section id="education" class="">
+              <section id="education">
                   <div class="fa fa-graduation-cap bg-primary style text-uppercase">
                       <span class="blue-title">
                         Education
@@ -139,8 +141,10 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     */
 
 
-        if(document.getElementsByClassName('flex-item').length === 0) {
-          document.getElementById('contacts').style.display = 'none';
+        if(document.getElementsByClassName('flex-item').length = 0) {
+          var a = document.getElementsByClassName('flex-item');
+          console.log(a)
+          document.getElementById('topContacts').style.display = 'none';
         }
         if(document.getElementsByTagName('h1').length === 0) {
           document.getElementById('header').style.display = 'none';
@@ -158,8 +162,8 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         if(document.getElementsByClassName('flex-item').length === 0) {
           document.getElementById('lets-connect').style.display = 'none';
         }
-         if(document.getElementById('map') === null) {
-           document.getElementById('p').style.display = 'none';
+         if(document.getElementById('mapDiv') === null) {
+           document.getElementById('mapDiv').style.display = 'none';
        }
     </script>
 
